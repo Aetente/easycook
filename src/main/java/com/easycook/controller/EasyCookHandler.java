@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.easycook.api.dto.PersonDto;
 import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
 import com.easycook.api.dto.RecieptShortDto;
+import com.easycook.api.dto.RecipeRemoveDto;
+import com.easycook.interfaces.IPerson;
+import com.easycook.interfaces.IProducts;
 import com.easycook.interfaces.IReciepts;
 import com.easycook.interfaces.IRecipesConstans;
 @RestController
@@ -19,6 +23,8 @@ import com.easycook.interfaces.IRecipesConstans;
 public class EasyCookHandler{
 	@Autowired
    IReciepts recipets;
+	IPerson persons;
+	IProducts products;
 
 	@PostMapping({IRecipesConstans.RECIPE})
 	public boolean addRecipe(@RequestBody RecieptDto recipe) {
@@ -26,9 +32,9 @@ public class EasyCookHandler{
 		return recipets.addRecipe(recipe);
 	}
 
-	@DeleteMapping({IRecipesConstans.RECIPE+"/{tittle},/{author}"})
-	public boolean removeRecipe(@PathVariable String tittle,@PathVariable String user) {
-		return recipets.removeRecipe(tittle, user);
+	@DeleteMapping({IRecipesConstans.RECIPE})
+	public boolean removeRecipe(@RequestBody RecipeRemoveDto recipe) {
+		return recipets.removeRecipe(recipe.getTittle(), recipe.getAuthor());
 	}
 
 	@GetMapping({IRecipesConstans.RECIPE+"/{tittle}"})
@@ -59,8 +65,25 @@ public class EasyCookHandler{
 	
 		return recipets.getRecipeByCategory(category);
 	}
-
-
+	
+	@PostMapping({IRecipesConstans.PROFILE})
+	boolean addPerson(@RequestBody PersonDto person) {
+		return persons.addPerson(person);
+	}
+	
+	@GetMapping({IRecipesConstans.PROFILE+"/{name}"})
+	PersonDto getPersonByName(@PathVariable String name) {
+		return persons.getPersonByName(name);
+	}
+	@PostMapping({IRecipesConstans.PRODUCT})
+	boolean addNewProduct(@RequestBody ProductDto product) {
+		return products.addNewProduct(product);
+		
+	}
+	@GetMapping({IRecipesConstans.PRODUCT+"/{name}"})
+	Iterable<ProductDto> getProduct(@PathVariable String name){
+		return products.getProduct(name);
+	}
 	}
 	
 	
