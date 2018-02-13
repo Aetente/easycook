@@ -7,9 +7,11 @@ public class RecieptShortDto {
 	private String mainDescription;
 	private double percent;
 	private double score;
+	
 	public RecieptShortDto() {
-		
 	}
+
+
 	public RecieptShortDto(String tittle, String categoryRecipes, String mainImg, String mainDescription,
 			double percent, double score) {
 		this.tittle = tittle;
@@ -19,29 +21,40 @@ public class RecieptShortDto {
 		this.percent = percent;
 		this.score = score;
 	}
+
+
 	public String getTittle() {
 		return tittle;
 	}
+
+
 	public String getCategoryRecipes() {
 		return categoryRecipes;
 	}
+
+
 	public String getMainImg() {
 		return mainImg;
 	}
+
+
 	public String getMainDescription() {
 		return mainDescription;
 	}
+
+
 	public double getPercent() {
 		return percent;
 	}
+
+
 	public double getScore() {
 		return score;
 	}
-	@Override
-	public String toString() {
-		return "RecieptShortDto [tittle=" + tittle + ", categoryRecipes=" + categoryRecipes + ", mainImg=" + mainImg
-				+ ", mainDescription=" + mainDescription + ", percent=" + percent + ", score=" + score + "]";
-	}
+	
+	
+	
+
 	
 
 }
