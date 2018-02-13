@@ -37,6 +37,11 @@ public class RecieptShortDto {
 	public double getScore() {
 		return score;
 	}
+	@Override
+	public String toString() {
+		return "RecieptShortDto [tittle=" + tittle + ", categoryRecipes=" + categoryRecipes + ", mainImg=" + mainImg
+				+ ", mainDescription=" + mainDescription + ", percent=" + percent + ", score=" + score + "]";
+	}
 	
 
 }
