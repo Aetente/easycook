@@ -6,14 +6,16 @@ public class RecieptDto extends RecieptShortDto {
 	private String author;
 	private ProductDto[] products;
 	private String method;
-	private StepDto[] steps;
+	private Step[] steps;
 	
 	
 	public RecieptDto() {
 	}
 
 
-	public RecieptDto(String author, ProductDto[] products, String method, StepDto[] steps) {
+	public RecieptDto(String tittle, String categoryRecipes, String mainImg, String mainDescription, double percent,
+			double score, String author, ProductDto[] products, String method, Step[] steps) {
+		super(tittle, categoryRecipes, mainImg, mainDescription, author, percent, score);
 		this.author = author;
 		this.products = products;
 		this.method = method;
@@ -36,8 +38,28 @@ public class RecieptDto extends RecieptShortDto {
 	}
 
 
-	public StepDto[] getSteps() {
+	public Step[] getSteps() {
 		return steps;
+	}
+
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+
+	public void setProducts(ProductDto[] products) {
+		this.products = products;
+	}
+
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+
+	public void setSteps(Step[] steps) {
+		this.steps = steps;
 	}
 
 

@@ -1,11 +1,11 @@
 package com.easycook.api.dto;
 
-public class StepDto {
+public class Step {
 	private String img;
 	private String description;
-	public StepDto() {
+	public Step() {
 	}
-	public StepDto(String img, String description) {
+	public Step(String img, String description) {
 		this.img = img;
 		this.description = description;
 	}

@@ -1,5 +1,7 @@
 package com.easycook.controller;
 
+import javax.xml.ws.soap.Addressing;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,10 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.easycook.api.dto.ChangeProfilePersonDto;
+import com.easycook.api.dto.ChangeRecipeDto;
 import com.easycook.api.dto.PersonDto;
 import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
 import com.easycook.api.dto.RecieptShortDto;
+import com.easycook.api.dto.RecipeFullDto;
 import com.easycook.api.dto.RecipeRemoveDto;
 import com.easycook.interfaces.IPerson;
 import com.easycook.interfaces.IProducts;
@@ -36,34 +41,54 @@ public class EasyCookHandler{
 	public boolean removeRecipe(@RequestBody RecipeRemoveDto recipe) {
 		return recipets.removeRecipe(recipe.getTittle(), recipe.getAuthor());
 	}
+	@PostMapping({IRecipesConstans.CHANGE_RECIPE})
+	boolean changeRecipe(ChangeRecipeDto recipe) {
+		return recipets.changeRecipe(recipe);
+	}
+	
+	@GetMapping({IRecipesConstans.RECIPES})
+	Iterable<RecieptShortDto> getAllRecipes(){
+		return recipets.getAllRecipes();
+	}
+	
 
 	@GetMapping({IRecipesConstans.RECIPE+"/{tittle}"})
-	public Iterable<RecieptDto> getRecipeByTittle(@PathVariable String tittle) {
+	public Iterable<RecieptShortDto> getRecipeByTittle(@PathVariable String tittle) {
 		return recipets.getRecipeByTittle(tittle);
 	}
-
+	
 	@GetMapping({IRecipesConstans.RECIPE+"/{author}"})
-	public Iterable<RecieptDto> getRecipeByAuthor(@PathVariable String author) {
+	public Iterable<RecieptShortDto> getRecipeByAuthor(@PathVariable String author) {
 		
 		return recipets.getRecipeByAuthor(author);
 	}
 
 	@GetMapping({IRecipesConstans.RECIPE+"/{products}"})
-	public Iterable<RecieptDto> getRecipeByProducts(@PathVariable ProductDto[] products) {
+	public Iterable<RecieptShortDto> getRecipeByProducts(@PathVariable ProductDto[] products) {
 		
 		return recipets.getRecipeByProducts(products);
 	}
 
 	@GetMapping({IRecipesConstans.RECIPE+"/{method}"})
-	public Iterable<RecieptDto> getRecipeByMethod(@PathVariable String method) {
+	public Iterable<RecieptShortDto> getRecipeByMethod(@PathVariable String method) {
 		
 		return recipets.getRecipeByMethod(method);
 	}
 
 	@GetMapping({IRecipesConstans.RECIPE+"/{category}"})
-	public Iterable<RecieptDto> getRecipeByCategory(@PathVariable String category) {
+	public Iterable<RecieptShortDto> getRecipeByCategory(@PathVariable String category) {
 	
 		return recipets.getRecipeByCategory(category);
+	}
+	
+	@GetMapping({IRecipesConstans.RECIPE})
+	RecieptDto getFullRecipe(String tittle, String author) {
+		return recipets.getFullRecipe(tittle, author);
+	}
+	
+	@PostMapping({IRecipesConstans.FAVORITES})
+	boolean addToFavorite(RecipeFullDto recipeId, PersonDto person) {
+		return recipets.addToFavorite(recipeId, person);
 	}
 	
 	@PostMapping({IRecipesConstans.PROFILE})
@@ -75,6 +100,12 @@ public class EasyCookHandler{
 	PersonDto getPersonByName(@PathVariable String name) {
 		return persons.getPersonByName(name);
 	}
+	
+	@PostMapping({IRecipesConstans.CHANGE_PERSON})
+	boolean editPerson(ChangeProfilePersonDto personData) {
+		return persons.editPerson(personData);
+	}
+	
 	@PostMapping({IRecipesConstans.PRODUCT})
 	boolean addNewProduct(@RequestBody ProductDto product) {
 		return products.addNewProduct(product);
