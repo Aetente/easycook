@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class PersonDto {
 	private String image;
 	private String name;
+	private String email;
 	private String password;
 	private double scorePerson;
 	private RecieptShortDto[] myRecipes;
@@ -15,15 +16,27 @@ public class PersonDto {
 	}
 
 
-	public PersonDto(String image, String name, String password, double scorePerson, RecieptShortDto[] myRecipes,
-			RecieptShortDto[] favoriteRecipes) {
+	
+
+	public PersonDto(String image, String name, String email, String password, double scorePerson,
+			RecieptShortDto[] myRecipes, RecieptShortDto[] favoriteRecipes) {
 		this.image = image;
 		this.name = name;
+		this.email = email;
 		this.password = password;
 		this.scorePerson = scorePerson;
 		this.myRecipes = myRecipes;
 		this.favoriteRecipes = favoriteRecipes;
 	}
+
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
 
 
 	public String getImage() {
@@ -86,12 +99,19 @@ public class PersonDto {
 	}
 
 
+
+
 	@Override
 	public String toString() {
-		return "PersonDto [image=" + image + ", name=" + name + ", password=" + password + ", scorePerson="
-				+ scorePerson + ", myRecipes=" + Arrays.toString(myRecipes) + ", favoriteRecipes="
+		return "PersonDto [image=" + image + ", name=" + name + ", email=" + email + ", password=" + password
+				+ ", scorePerson=" + scorePerson + ", myRecipes=" + Arrays.toString(myRecipes) + ", favoriteRecipes="
 				+ Arrays.toString(favoriteRecipes) + "]";
 	}
-	
+
+
+
+
+
+
 	
 }
