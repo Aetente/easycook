@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class PersonDto {
 	private String image;
 	private String name;
+	private String lastName;
 	private String email;
 	private String password;
 	private double scorePerson;
@@ -16,12 +17,11 @@ public class PersonDto {
 	}
 
 
-	
-
-	public PersonDto(String image, String name, String email, String password, double scorePerson,
+	public PersonDto(String image, String name, String lastName, String email, String password, double scorePerson,
 			RecieptShortDto[] myRecipes, RecieptShortDto[] favoriteRecipes) {
 		this.image = image;
 		this.name = name;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.scorePerson = scorePerson;
@@ -30,6 +30,11 @@ public class PersonDto {
 	}
 
 
+
+
+	public String getLastName() {
+		return lastName;
+	}
 
 
 	public String getEmail() {
@@ -99,14 +104,16 @@ public class PersonDto {
 	}
 
 
-
-
 	@Override
 	public String toString() {
-		return "PersonDto [image=" + image + ", name=" + name + ", email=" + email + ", password=" + password
-				+ ", scorePerson=" + scorePerson + ", myRecipes=" + Arrays.toString(myRecipes) + ", favoriteRecipes="
-				+ Arrays.toString(favoriteRecipes) + "]";
+		return "PersonDto [image=" + image + ", name=" + name + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", scorePerson=" + scorePerson + ", myRecipes="
+				+ Arrays.toString(myRecipes) + ", favoriteRecipes=" + Arrays.toString(favoriteRecipes) + "]";
 	}
+
+
+
+
 
 
 
