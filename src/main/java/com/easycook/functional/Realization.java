@@ -1,14 +1,51 @@
 package com.easycook.functional;
 
+import com.easycook.api.dto.ChangeProfilePersonDto;
 import com.easycook.api.dto.ChangeRecipeDto;
 import com.easycook.api.dto.PersonDto;
 import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
 import com.easycook.api.dto.RecieptShortDto;
-import com.easycook.api.dto.RecipeFullDto;
+import com.easycook.interfaces.IDatabaseController;
 import com.easycook.interfaces.IReciepts;
 
-public class Recipes implements IReciepts{
+public class Realization implements IDatabaseController{
+
+	@Override
+	public boolean addPerson(PersonDto person) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public PersonDto getPersonByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean editPerson(ChangeProfilePersonDto personData) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public double ratingPerson(double[] marks) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean addNewProduct(ProductDto product) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Iterable<ProductDto> getProduct(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public boolean addRecipe(RecieptDto recipe) {
@@ -23,7 +60,7 @@ public class Recipes implements IReciepts{
 	}
 
 	@Override
-	public boolean changeRecipe(ChangeRecipeDto recipe) {
+	public boolean changeRecipe(RecieptDto recipe) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -71,13 +108,13 @@ public class Recipes implements IReciepts{
 	}
 
 	@Override
-	public boolean addToFavorite(RecipeFullDto recipeId, PersonDto person) {
+	public boolean addToFavorite(String tittle, String author, PersonDto person) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public double calculatePercentageOfMatches(ProductDto[] products, RecieptShortDto[] recipes) {
+	public double calculatePercentageOfMatches(ProductDto[] products, RecieptDto[] recipes) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -87,5 +124,7 @@ public class Recipes implements IReciepts{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }
