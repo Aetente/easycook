@@ -46,18 +46,18 @@ public class EasyCookHandler{
 	}
 	
 
-	@GetMapping({IRecipesConstans.RECIPE+"/{tittle}"})
+	@GetMapping({IRecipesConstans.RECIPE+"/title/{tittle}"})
 	public Iterable<RecieptShortDto> getRecipeByTittle(@PathVariable String tittle) {
 		return dbController.getRecipeByTittle(tittle);
 	}
 	
-	@GetMapping({IRecipesConstans.RECIPE+"/{author}"})
+	@GetMapping({IRecipesConstans.RECIPE+"/author/{author}"})
 	public Iterable<RecieptShortDto> getRecipeByAuthor(@PathVariable String author) {
 		
 		return dbController.getRecipeByAuthor(author);
 	}
 
-	@PostMapping(IRecipesConstans.RECIPE)
+	@PostMapping({IRecipesConstans.RECIPE+"/products"})
 	public Iterable<RecieptShortDto> getRecipeByProducts(@RequestBody ProductDto[] products) {
 		
 		return dbController.getRecipeByProducts(products);
@@ -90,9 +90,9 @@ public class EasyCookHandler{
 		return dbController.addPerson(person);
 	}
 	
-	@GetMapping({IRecipesConstans.PROFILE+"/{name}"})
-	PersonDto getPersonByName(@PathVariable String name) {
-		return dbController.getPersonByName(name);
+	@GetMapping({IRecipesConstans.PROFILE+"/{login}"})
+	PersonDto getPersonByName(@PathVariable String login) {
+		return dbController.getPersonByName(login);
 	}
 	
 	@PutMapping({IRecipesConstans.CHANGE_PERSON})

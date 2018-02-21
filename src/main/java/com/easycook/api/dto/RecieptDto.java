@@ -1,6 +1,5 @@
 package com.easycook.api.dto;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.easycook.entities.Step;
@@ -10,6 +9,7 @@ public class RecieptDto extends RecieptShortDto {
 	private  List<ProductDto> products;
 	private String method;
 	private List<Step> steps;//list
+	private int amountOfVoters;
 	
 	
 	public RecieptDto() {
@@ -17,11 +17,12 @@ public class RecieptDto extends RecieptShortDto {
 
 
 	public RecieptDto(String tittle, String categoryRecipes, String author, String mainImg, String mainDescription,
-			double percent, double score, List<ProductDto> products, String method, List<Step> steps) {
+			double percent, double score, List<ProductDto> products, String method, List<Step> steps, int amountOfVoters) {
 		super(tittle, categoryRecipes, author, mainImg, mainDescription, percent, score);
 		this.products = products;
 		this.method = method;
 		this.steps = steps;
+		this.amountOfVoters = amountOfVoters;
 	}
 
 
@@ -55,10 +56,20 @@ public class RecieptDto extends RecieptShortDto {
 		this.steps = steps;
 	}
 
+	public int getAmountOfVoters() {
+		return amountOfVoters;
+	}
+
+
+	public void setAmountOfVoters(int amountOfVoters) {
+		this.amountOfVoters = amountOfVoters;
+	}
+
 
 	@Override
 	public String toString() {
-		return "RecieptDto [products=" + products + ", method=" + method + ", steps=" + steps + "]";
+		return "RecieptDto [products=" + products + ", method=" + method + ", steps=" + steps + ", amountOfVoters="
+				+ amountOfVoters + "]";
 	}
 
 

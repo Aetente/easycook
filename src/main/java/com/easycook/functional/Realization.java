@@ -1,15 +1,20 @@
 package com.easycook.functional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
 import com.easycook.api.dto.ChangeProfilePersonDto;
-import com.easycook.api.dto.ChangeRecipeDto;
 import com.easycook.api.dto.PersonDto;
 import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
 import com.easycook.api.dto.RecieptShortDto;
 import com.easycook.interfaces.IDatabaseController;
-import com.easycook.interfaces.IReciepts;
-
+@Repository
 public class Realization implements IDatabaseController{
+	@PersistenceContext
+	EntityManager em;
 
 	@Override
 	public boolean addPerson(PersonDto person) {

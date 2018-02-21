@@ -6,6 +6,7 @@ public class PersonDto {
 	private String image;
 	private String name;
 	private String lastName;
+	private String login;
 	private String email;
 	private String password;
 	private double scorePerson;
@@ -17,7 +18,7 @@ public class PersonDto {
 	}
 
 
-	public PersonDto(String image, String name, String lastName, String email, String password, double scorePerson,
+	public PersonDto(String image, String name, String lastName,String login, String email, String password, double scorePerson,
 			RecieptShortDto[] myRecipes, RecieptShortDto[] favoriteRecipes) {
 		this.image = image;
 		this.name = name;
@@ -109,6 +110,16 @@ public class PersonDto {
 		return "PersonDto [image=" + image + ", name=" + name + ", lastName=" + lastName + ", email=" + email
 				+ ", password=" + password + ", scorePerson=" + scorePerson + ", myRecipes="
 				+ Arrays.toString(myRecipes) + ", favoriteRecipes=" + Arrays.toString(favoriteRecipes) + "]";
+	}
+
+
+	public String getLogin() {
+		return login;
+	}
+
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 

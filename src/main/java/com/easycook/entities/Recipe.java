@@ -2,47 +2,52 @@ package com.easycook.entities;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
 
 public class Recipe {
-	private String tittle;
+	@EmbeddedId
+	private RecipeId receipId;
 	private String mainImage;
 	private String mainDescription;
 	private double persent;
 	private double score;
 	private int amountOfVoters;
-	private String author;
 	@ManyToMany
-	ArrayList<Product> products;
+	List<Product> products;
 	private String method;
 	@OneToMany
-	Step[] steps;
+	List<Step> steps;
 	private String categoryRecipes;
 	
 	
 	
-	public Recipe(int amountOfVoters, RecieptDto recipe) {
-		this.amountOfVoters = amountOfVoters;
-		this.tittle = recipe.getTittle();
+	public Recipe(RecieptDto recipe) {
+		this.amountOfVoters = recipe.getAmountOfVoters();
+		this.receipId = new RecipeId(recipe.getTittle(), recipe.getAuthor());
 		this.mainImage = recipe.getMainImg();
 		this.mainDescription = recipe.getMainDescription();
 		this.persent=recipe.getPercent();
 		this.score=recipe.getScore();
-		this.author=recipe.getAuthor();
 		this.method=recipe.getMethod();
 		this.categoryRecipes=recipe.getCategoryRecipes();
+		this.products = new ArrayList<>();
+		for (ProductDto product : recipe.getProducts()) {
+			Product pr = new Product(product); 
+			this.products.add(pr);
+		}
+		this.steps=recipe.getSteps();
 	}
 		
-	public String getTittle() {
-		return tittle;
-	}
-	public void setTittle(String tittle) {
-		this.tittle = tittle;
-	}
+	
+	
 	public String getMainImage() {
 		return mainImage;
 	}
@@ -67,16 +72,11 @@ public class Recipe {
 	public void setScore(double score) {
 		this.score = score;
 	}
-	public String getAuthor() {
-		return author;
-	}
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	public ArrayList<Product> getProducts() {
+	
+	public List<Product> getProducts() {
 		return products;
 	}
-	public void setProducts(ArrayList<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 	public String getMethod() {
@@ -85,25 +85,38 @@ public class Recipe {
 	public void setMethod(String method) {
 		this.method = method;
 	}
-	public Step[] getSteps() {
+	
+	public RecipeId getReceipId() {
+		return receipId;
+	}
+
+
+
+	public void setReceipId(RecipeId receipId) {
+		this.receipId = receipId;
+	}
+
+
+
+	public List<Step> getSteps() {
 		return steps;
 	}
-	public void setSteps(Step[] steps) {
+
+
+
+	public void setSteps(List<Step> steps) {
 		this.steps = steps;
 	}
+
+
+
 	public String getCategoryRecipes() {
 		return categoryRecipes;
 	}
 	public void setCategoryRecipes(String categoryRecipes) {
 		this.categoryRecipes = categoryRecipes;
 	}
-	@Override
-	public String toString() {
-		return "Recipe [tittle=" + tittle + ", mainImage=" + mainImage + ", mainDescription=" + mainDescription
-				+ ", persent=" + persent + ", score=" + score + ", author=" + author + ", products=" + products
-				+ ", method=" + method + ", steps=" + Arrays.toString(steps) + ", categoryRecipes=" + categoryRecipes
-				+ "]";
-	}
+	
 
 	public int getAmountOfVoters() {
 		return amountOfVoters;

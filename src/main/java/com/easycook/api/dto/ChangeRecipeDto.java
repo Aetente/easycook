@@ -8,9 +8,13 @@ public class ChangeRecipeDto extends RecieptDto {
 	private String email;
 
 	
+	
+
 	public ChangeRecipeDto(String tittle, String categoryRecipes, String author, String mainImg, String mainDescription,
-			double percent, double score, List<ProductDto> products, String method, List<Step> steps, String email) {
-		super(tittle, categoryRecipes, author, mainImg, mainDescription, percent, score, products, method, steps);
+			double percent, double score, List<ProductDto> products, String method, List<Step> steps,
+			int amountOfVoters, String email) {
+		super(tittle, categoryRecipes, author, mainImg, mainDescription, percent, score, products, method, steps,
+				amountOfVoters);
 		this.email = email;
 	}
 
