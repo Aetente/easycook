@@ -6,6 +6,7 @@ import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
 import com.easycook.api.dto.RecieptShortDto;
 import com.easycook.entities.Person;
+import com.easycook.entities.Product;
 import com.easycook.entities.Recipe;
 import com.easycook.entities.RecipeId;
 
@@ -31,4 +32,5 @@ public interface IDatabaseController {
 	double ratingRecipes(double mark);
 	Recipe mappingRecipe(RecieptDto recipe);
 	Person mappingPerson(PersonDto person);
+	Product mappingProduct(ProductDto product);
 }

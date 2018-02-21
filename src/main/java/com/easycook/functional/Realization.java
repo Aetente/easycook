@@ -12,6 +12,7 @@ import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
 import com.easycook.api.dto.RecieptShortDto;
 import com.easycook.entities.Person;
+import com.easycook.entities.Product;
 import com.easycook.entities.Recipe;
 import com.easycook.entities.RecipeId;
 import com.easycook.interfaces.IDatabaseController;
@@ -159,5 +160,12 @@ public class Realization implements IDatabaseController {
 		Person personEntity = new Person(person);
 		return personEntity;
 	}
+
+	@Override
+	public Product mappingProduct(ProductDto product) {
+		Product productEntity = new Product(product);
+		return productEntity;
+	}
+	
 
 }
