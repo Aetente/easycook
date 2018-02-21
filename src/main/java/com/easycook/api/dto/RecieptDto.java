@@ -2,12 +2,13 @@ package com.easycook.api.dto;
 
 import java.util.List;
 
+import com.easycook.entities.MethodOfRecipe;
 import com.easycook.entities.Step;
 
 public class RecieptDto extends RecieptShortDto {
 	
 	private  List<ProductDto> products;
-	private String method;
+	private List<MethodOfRecipe> method;
 	private List<Step> steps;//list
 	private int amountOfVoters;
 	
@@ -16,9 +17,7 @@ public class RecieptDto extends RecieptShortDto {
 	}
 
 
-	public RecieptDto(String tittle, String categoryRecipes, String author, String mainImg, String mainDescription,
-			double percent, double score, List<ProductDto> products, String method, List<Step> steps, int amountOfVoters) {
-		super(tittle, categoryRecipes, author, mainImg, mainDescription, percent, score);
+	public RecieptDto(List<ProductDto> products, List<MethodOfRecipe> method, List<Step> steps, int amountOfVoters) {
 		this.products = products;
 		this.method = method;
 		this.steps = steps;
@@ -31,7 +30,7 @@ public class RecieptDto extends RecieptShortDto {
 	}
 
 
-	public String getMethod() {
+	public List<MethodOfRecipe> getMethod() {
 		return method;
 	}
 
@@ -40,7 +39,7 @@ public class RecieptDto extends RecieptShortDto {
 	}
 
 
-	public void setMethod(String method) {
+	public void setMethod(List<MethodOfRecipe> method) {
 		this.method = method;
 	}
 

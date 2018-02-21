@@ -1,33 +1,57 @@
 package com.easycook.api.dto;
 
+import com.easycook.entities.RecipeId;
+
 public class RecipeRemoveDto {
-	private String author;
-	private String tittle;
+	private String user;
+	private RecipeId idRec;
 	
 	
 	public RecipeRemoveDto() {
 	}
 
 
-	public RecipeRemoveDto(String author, String tittle) {
-		this.author = author;
-		this.tittle = tittle;
+
+
+
+	public RecipeRemoveDto(String user, RecipeId idRec) {
+		this.user = user;
+		this.idRec = idRec;
 	}
+
+
+
 
 
 	public String getAuthor() {
-		return author;
+		return user;
 	}
 
 
-	public String getTittle() {
-		return tittle;
+	
+	public String getUser() {
+		return user;
+	}
+
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+
+	public RecipeId getIdRec() {
+		return idRec;
+	}
+
+
+	public void setIdRec(RecipeId idRec) {
+		this.idRec = idRec;
 	}
 
 
 	@Override
 	public String toString() {
-		return "RecipeRemoveDto [author=" + author + ", tittle=" + tittle + "]";
+		return "RecipeRemoveDto [author=" + user + ", tittle=" + idRec + "]";
 	}
 	
 }

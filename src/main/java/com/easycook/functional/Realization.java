@@ -4,19 +4,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.easycook.api.dto.ChangeProfilePersonDto;
 import com.easycook.api.dto.PersonDto;
 import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
 import com.easycook.api.dto.RecieptShortDto;
+import com.easycook.entities.RecipeId;
 import com.easycook.interfaces.IDatabaseController;
 @Repository
 public class Realization implements IDatabaseController{
+
 	@PersistenceContext
 	EntityManager em;
 
 	@Override
+	@Transactional
 	public boolean addPerson(PersonDto person) {
 		// TODO Auto-generated method stub
 		return false;
@@ -59,7 +63,7 @@ public class Realization implements IDatabaseController{
 	}
 
 	@Override
-	public boolean removeRecipe(String tittle, String user) {
+	public boolean removeRecipe(RecipeId tittle, String user) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -107,13 +111,13 @@ public class Realization implements IDatabaseController{
 	}
 
 	@Override
-	public RecieptDto getFullRecipe(String tittle, String author) {
+	public RecieptDto getFullRecipeById(RecipeId idRec) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean addToFavorite(String tittle, String author, PersonDto person) {
+	public boolean addToFavorite(RecipeId idRec, PersonDto person) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -129,7 +133,6 @@ public class Realization implements IDatabaseController{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 	
 
 }

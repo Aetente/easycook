@@ -17,6 +17,7 @@ import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
 import com.easycook.api.dto.RecieptShortDto;
 import com.easycook.api.dto.RecipeRemoveDto;
+import com.easycook.entities.RecipeId;
 import com.easycook.interfaces.IDatabaseController;
 import com.easycook.interfaces.IRecipesConstans;
 @RestController
@@ -33,7 +34,7 @@ public class EasyCookHandler{
 
 	@DeleteMapping({IRecipesConstans.RECIPE})
 	public boolean removeRecipe(@RequestBody RecipeRemoveDto recipe) {
-		return dbController.removeRecipe(recipe.getTittle(), recipe.getAuthor());
+		return dbController.removeRecipe(recipe.getIdRec(), recipe.getAuthor());
 	}
 	@PutMapping({IRecipesConstans.CHANGE_RECIPE})
 	boolean changeRecipe(ChangeRecipeDto recipe) {
@@ -76,13 +77,13 @@ public class EasyCookHandler{
 	}
 	
 	@GetMapping({IRecipesConstans.RECIPE+"/{title}/{author}"})
-	RecieptDto getFullRecipe(@PathVariable String title, @PathVariable String author) {
-		return dbController.getFullRecipe(title, author);
+	RecieptDto getFullRecipeById(@PathVariable String title, @PathVariable String author) {
+		return dbController.getFullRecipeById(new RecipeId(title,author));
 	}
 	
 	@PostMapping({IRecipesConstans.FAVORITES+"/{title}/{author}"})
 	boolean addToFavorite(@PathVariable String title, @PathVariable String author, @RequestBody PersonDto person) {
-		return dbController.addToFavorite(title,author, person);
+		return dbController.addToFavorite(new RecipeId(title,author), person);
 	}
 	
 	@PostMapping({IRecipesConstans.PROFILE})

@@ -22,7 +22,7 @@ public class Recipe {
 	private int amountOfVoters;
 	@ManyToMany
 	List<Product> products;
-	private String method;
+	private List<MethodOfRecipe> methods;
 	@OneToMany
 	List<Step> steps;
 	private String categoryRecipes;
@@ -36,7 +36,7 @@ public class Recipe {
 		this.mainDescription = recipe.getMainDescription();
 		this.persent=recipe.getPercent();
 		this.score=recipe.getScore();
-		this.method=recipe.getMethod();
+		this.methods=recipe.getMethod();
 		this.categoryRecipes=recipe.getCategoryRecipes();
 		this.products = new ArrayList<>();
 		for (ProductDto product : recipe.getProducts()) {
@@ -79,13 +79,20 @@ public class Recipe {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-	public String getMethod() {
-		return method;
-	}
-	public void setMethod(String method) {
-		this.method = method;
-	}
 	
+	
+	public List<MethodOfRecipe> getMethods() {
+		return methods;
+	}
+
+
+
+	public void setMethods(List<MethodOfRecipe> methods) {
+		this.methods = methods;
+	}
+
+
+
 	public RecipeId getReceipId() {
 		return receipId;
 	}

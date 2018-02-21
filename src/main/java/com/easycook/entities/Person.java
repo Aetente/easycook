@@ -22,27 +22,27 @@ public class Person {
 	private String image;
 	private double scorePerson;
 	@OneToMany
-	List<Recipe>myRecipes;
+	List<RecipeId>myRecipes;
 	@OneToMany
-	List<Recipe>favoriteRecipes;
+	List<RecipeId>favoriteRecipes;
 	
 	
 	public Person(PersonDto person) {
 		this.name = person.getName();
 		this.lastName = person.getLastName();
 		this.password = person.getPassword();
-		this.setLogin(person.getLogin());
+		this.login=person.getLogin();
 		this.email = person.getEmail();
 		this.image = person.getImage();
 		this.scorePerson = person.getScorePerson();
 		this.myRecipes=new ArrayList<>();
-		for(RecieptShortDto recipeMy: person.getMyRecipes()) {
-			Recipe myRec=new Recipe((RecieptDto) recipeMy);
-			myRecipes.add(myRec);
+		for(RecipeId recipeMy: person.getMyRecipes()) {
+			
+			myRecipes.add(recipeMy);
 		}
-		for(RecieptShortDto recipeFav: person.getMyRecipes()) {
-			Recipe favRec=new Recipe((RecieptDto) recipeFav);
-			favoriteRecipes.add(favRec);
+		for(RecipeId recipeFav: person.getMyRecipes()) {
+		
+			favoriteRecipes.add(recipeFav);
 		}
 		
 	}
@@ -61,8 +61,6 @@ public class Person {
 		this.scorePerson = scorePerson;
 	}
 
-
-	
 
 	public String getName() {
 		return name;
@@ -83,27 +81,21 @@ public class Person {
 		return scorePerson;
 	}
 	
-
-
-	public List<Recipe> getMyRecipes() {
+	public List<RecipeId> getMyRecipes() {
 		return myRecipes;
 	}
 
-
-	public void setMyRecipes(List<Recipe> myRecipes) {
+	public void setMyRecipes(List<RecipeId> myRecipes) {
 		this.myRecipes = myRecipes;
 	}
 
-
-	public List<Recipe> getFavoriteRecipes() {
+	public List<RecipeId> getFavoriteRecipes() {
 		return favoriteRecipes;
 	}
 
-
-	public void setFavoriteRecipes(List<Recipe> favoriteRecipes) {
+	public void setFavoriteRecipes(List<RecipeId> favoriteRecipes) {
 		this.favoriteRecipes = favoriteRecipes;
 	}
-
 
 	public String getLogin() {
 		return login;

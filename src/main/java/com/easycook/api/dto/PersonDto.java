@@ -1,6 +1,9 @@
 package com.easycook.api.dto;
 
 import java.util.Arrays;
+import java.util.List;
+
+import com.easycook.entities.RecipeId;
 
 public class PersonDto {
 	private String image;
@@ -10,25 +13,27 @@ public class PersonDto {
 	private String email;
 	private String password;
 	private double scorePerson;
-	private RecieptShortDto[] myRecipes;
-	private RecieptShortDto[] favoriteRecipes;
+	private List<RecipeId> myRecipes;
+	private List<RecipeId> favoriteRecipes;
 	
 	
 	public PersonDto() {
 	}
 
 
-	public PersonDto(String image, String name, String lastName,String login, String email, String password, double scorePerson,
-			RecieptShortDto[] myRecipes, RecieptShortDto[] favoriteRecipes) {
+	public PersonDto(String image, String name, String lastName, String login, String email, String password,
+			double scorePerson, List<RecipeId> myRecipes, List<RecipeId> favoriteRecipes) {
 		this.image = image;
 		this.name = name;
 		this.lastName = lastName;
+		this.login = login;
 		this.email = email;
 		this.password = password;
 		this.scorePerson = scorePerson;
 		this.myRecipes = myRecipes;
 		this.favoriteRecipes = favoriteRecipes;
 	}
+
 
 
 
@@ -65,14 +70,7 @@ public class PersonDto {
 	}
 
 
-	public RecieptShortDto[] getMyRecipes() {
-		return myRecipes;
-	}
-
-
-	public RecieptShortDto[] getFavoriteRecipes() {
-		return favoriteRecipes;
-	}
+	
 
 
 	public void setImage(String image) {
@@ -94,22 +92,23 @@ public class PersonDto {
 		this.scorePerson = scorePerson;
 	}
 
+	public List<RecipeId> getMyRecipes() {
+		return myRecipes;
+	}
 
-	public void setMyRecipes(RecieptShortDto[] myRecipes) {
+
+	public void setMyRecipes(List<RecipeId> myRecipes) {
 		this.myRecipes = myRecipes;
 	}
 
 
-	public void setFavoriteRecipes(RecieptShortDto[] favoriteRecipes) {
-		this.favoriteRecipes = favoriteRecipes;
+	public List<RecipeId> getFavoriteRecipes() {
+		return favoriteRecipes;
 	}
 
 
-	@Override
-	public String toString() {
-		return "PersonDto [image=" + image + ", name=" + name + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", scorePerson=" + scorePerson + ", myRecipes="
-				+ Arrays.toString(myRecipes) + ", favoriteRecipes=" + Arrays.toString(favoriteRecipes) + "]";
+	public void setFavoriteRecipes(List<RecipeId> favoriteRecipes) {
+		this.favoriteRecipes = favoriteRecipes;
 	}
 
 
@@ -120,6 +119,14 @@ public class PersonDto {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+
+	@Override
+	public String toString() {
+		return "PersonDto [image=" + image + ", name=" + name + ", lastName=" + lastName + ", login=" + login
+				+ ", email=" + email + ", password=" + password + ", scorePerson=" + scorePerson + ", myRecipes="
+				+ myRecipes + ", favoriteRecipes=" + favoriteRecipes + "]";
 	}
 
 
