@@ -19,8 +19,9 @@ public class Realization implements IDatabaseController{
 	@PersistenceContext
 	EntityManager em;
 
-	@Override
+	
 	@Transactional
+	@Override
 	public boolean addPerson(PersonDto person) {
 		// TODO Auto-generated method stub
 		return false;
@@ -33,7 +34,7 @@ public class Realization implements IDatabaseController{
 	}
 
 	@Override
-	public boolean editPerson(ChangeProfilePersonDto personData) {
+	public boolean editPerson(ChangeProfilePersonDto personData, String email) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -63,13 +64,13 @@ public class Realization implements IDatabaseController{
 	}
 
 	@Override
-	public boolean removeRecipe(RecipeId tittle, String user) {
+	public boolean removeRecipe(RecipeId tittle, String email) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean changeRecipe(RecieptDto recipe) {
+	public boolean changeRecipe(RecieptDto recipe, String email) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -133,6 +134,7 @@ public class Realization implements IDatabaseController{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	
 
 }

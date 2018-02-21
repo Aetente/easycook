@@ -129,9 +129,6 @@ public class Recipe {
 		return amountOfVoters;
 	}
 
-	public void setAmountOfVoters(int amountOfVoters) {
-		this.amountOfVoters = amountOfVoters;
-	}
 	
 	
 }

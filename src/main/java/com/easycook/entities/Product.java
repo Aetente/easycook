@@ -1,8 +1,11 @@
 package com.easycook.entities;
 
+import org.springframework.data.annotation.Id;
+
 import com.easycook.api.dto.ProductDto;
 
 public class Product {
+	@Id
 	private String name;
 	private double quantity;
 	private String unit;

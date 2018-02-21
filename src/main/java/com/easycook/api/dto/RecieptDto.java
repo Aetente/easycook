@@ -60,10 +60,7 @@ public class RecieptDto extends RecieptShortDto {
 	}
 
 
-	public void setAmountOfVoters(int amountOfVoters) {
-		this.amountOfVoters = amountOfVoters;
-	}
-
+	
 
 	@Override
 	public String toString() {

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.easycook.api.dto.ChangeProfilePersonDto;
@@ -33,12 +34,13 @@ public class EasyCookHandler{
 	}
 
 	@DeleteMapping({IRecipesConstans.RECIPE})
-	public boolean removeRecipe(@RequestBody RecipeRemoveDto recipe) {
-		return dbController.removeRecipe(recipe.getIdRec(), recipe.getAuthor());
+	public boolean removeRecipe(@RequestBody RecipeRemoveDto recipe,@RequestHeader("Authorization") String email) {
+		return dbController.removeRecipe(recipe.getIdRec(), email); //TODO
 	}
-	@PutMapping({IRecipesConstans.CHANGE_RECIPE})
-	boolean changeRecipe(ChangeRecipeDto recipe) {
-		return dbController.changeRecipe(recipe);
+	@PutMapping({IRecipesConstans.CHANGE_RECIPE}) //TODO 
+	boolean changeRecipe(@RequestBody ChangeRecipeDto recipe, @RequestHeader("Authorization") String email) {
+		//token get email
+		return dbController.changeRecipe(recipe,email);
 	}
 	
 	@GetMapping({IRecipesConstans.RECIPES})
@@ -96,9 +98,9 @@ public class EasyCookHandler{
 		return dbController.getPersonByName(login);
 	}
 	
-	@PutMapping({IRecipesConstans.CHANGE_PERSON})
-	boolean editPerson(ChangeProfilePersonDto personData) {
-		return dbController.editPerson(personData);
+	@PutMapping({IRecipesConstans.CHANGE_PERSON}) //TODO
+	boolean editPerson(@RequestBody ChangeProfilePersonDto personData,@RequestHeader("Authorization") String user) {
+		return dbController.editPerson(personData,user);
 	}
 	
 	@PostMapping({IRecipesConstans.PRODUCT})

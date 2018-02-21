@@ -10,13 +10,13 @@ import com.easycook.entities.RecipeId;
 public interface IDatabaseController {
 	boolean addPerson(PersonDto person);
 	PersonDto getPersonByName(String name);
-	boolean editPerson(ChangeProfilePersonDto personData);  //!! 
+	boolean editPerson(ChangeProfilePersonDto personData, String email); //TODO
 	double ratingPerson(double[] marks);
 	boolean addNewProduct(ProductDto product);
 	Iterable<ProductDto> getProduct(String name);
 	boolean addRecipe(RecieptDto recipe); 
-	boolean removeRecipe(RecipeId tittle, String user);  
-	boolean changeRecipe(RecieptDto recipe);   
+	boolean removeRecipe(RecipeId tittle, String email);  //TODO
+	boolean changeRecipe(RecieptDto recipe,String email);   //TODO
 	Iterable<RecieptShortDto> getAllRecipes();
 	Iterable<RecieptShortDto> getRecipeByTittle(String tittle);
 	Iterable<RecieptShortDto> getRecipeByAuthor(String author);
