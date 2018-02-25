@@ -62,12 +62,13 @@ public class Realization implements IDatabaseController {
 
 	@Override
 	public boolean addRecipe(RecieptDto recipe) {
+		
 		if (getFullRecipeById(recipe.getRecipeId()) != null) {
 			return false; // you can`t add recipe if combination consist
 		} else if (recipe.getRecipeId() != null && recipe.getMainImg() != null && recipe.getMainDescription() != null
 				&& recipe.getProducts() != null && recipe.getMethod() != null && recipe.getSteps() != null
 				&& recipe.getCategoryRecipes() != null) {
-			em.persist(recipe);
+			em.persist(mappingRecipeToEnt(recipe));
 		} // check field on null
 
 		return true;
@@ -75,7 +76,7 @@ public class Realization implements IDatabaseController {
 
 	@Override
 	public boolean removeRecipe(RecipeId tittle, String email) {
-		Recipe recipe = mappingRecipe(getFullRecipeById(tittle)); 
+		Recipe recipe = mappingRecipeToEnt(getFullRecipeById(tittle)); 
 		if (tittle.getAuthorId() != email && recipe == null) {
 			return false;
 		}
@@ -127,8 +128,10 @@ public class Realization implements IDatabaseController {
 
 	@Override
 	public RecieptDto getFullRecipeById(RecipeId idRec) {
+		
+		//return em.find(Recipe.class, idRec);
 		// TODO Auto-generated method stub
-		return null;
+				return null;
 	}
 
 	@Override
@@ -149,22 +152,42 @@ public class Realization implements IDatabaseController {
 		return 0;
 	}
 
+
+
 	@Override
-	public Recipe mappingRecipe(RecieptDto recipe) {
+	public Recipe mappingRecipeToEnt(RecieptDto recipe) {
 		Recipe recipeEntity = new Recipe(recipe);
-;		return recipeEntity;
+		return recipeEntity;
 	}
 
 	@Override
-	public Person mappingPerson(PersonDto person) {
+	public Person mappingPersonToEnt(PersonDto person) {
 		Person personEntity = new Person(person);
 		return personEntity;
 	}
 
 	@Override
-	public Product mappingProduct(ProductDto product) {
+	public Product mappingProductToEnt(ProductDto product) {
 		Product productEntity = new Product(product);
 		return productEntity;
+	}
+
+	@Override
+	public RecieptDto mappingRecipeToDto(Recipe recipe) {
+		RecieptDto recipeDto = new RecieptDto(recipe);
+		return recipeDto;
+	}
+
+	@Override
+	public PersonDto mappingPersonToDto(Person person) {
+		PersonDto personDto = new PersonDto(person);
+		return personDto;
+	}
+
+	@Override
+	public ProductDto mappingProductToDto(Product product) {
+		ProductDto productDto = new ProductDto(product);
+		return productDto;
 	}
 	
 

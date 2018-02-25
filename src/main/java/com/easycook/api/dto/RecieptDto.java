@@ -1,8 +1,12 @@
 package com.easycook.api.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.easycook.entities.MethodOfRecipe;
+import com.easycook.entities.Product;
+import com.easycook.entities.Recipe;
+import com.easycook.entities.RecipeId;
 import com.easycook.entities.Step;
 
 public class RecieptDto extends RecieptShortDto {
@@ -15,14 +19,31 @@ public class RecieptDto extends RecieptShortDto {
 	
 	public RecieptDto() {
 	}
+	
+	
+	public RecieptDto(Recipe recipe) {
+		super(recipe.getReceipId(), recipe.getReceipId().getTitle(), recipe.getCategoryRecipes(), recipe.getReceipId().getAuthorId(), recipe.getMainImage(), recipe.getMainDescription(), recipe.getPersent(), recipe.getScore());
+		
+		this.products = new ArrayList<>();
+		for(Product product : recipe.getProducts()) {
+			ProductDto pr = new ProductDto(product);
+			this.products.add(pr);
+		}
+		this.method = recipe.getMethods();
+		this.steps = recipe.getSteps();
+		this.amountOfVoters = recipe.getAmountOfVoters();
+	}
 
-
-	public RecieptDto(List<ProductDto> products, List<MethodOfRecipe> method, List<Step> steps, int amountOfVoters) {
+	public RecieptDto(RecipeId recipeId, String tittle, String categoryRecipes, String author, String mainImg,
+			String mainDescription, double percent, double score, List<ProductDto> products,
+			List<MethodOfRecipe> method, List<Step> steps, int amountOfVoters) {
+		super(recipeId, tittle, categoryRecipes, author, mainImg, mainDescription, percent, score);
 		this.products = products;
 		this.method = method;
 		this.steps = steps;
 		this.amountOfVoters = amountOfVoters;
 	}
+
 
 
 	public List<ProductDto> getProducts() {

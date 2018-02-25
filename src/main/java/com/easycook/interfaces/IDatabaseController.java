@@ -30,7 +30,10 @@ public interface IDatabaseController {
 	boolean addToFavorite(RecipeId idRec, PersonDto person); 
 	double calculatePercentageOfMatches(ProductDto[] products, RecieptDto[] recipes);
 	double ratingRecipes(double mark);
-	Recipe mappingRecipe(RecieptDto recipe);
-	Person mappingPerson(PersonDto person);
-	Product mappingProduct(ProductDto product);
+	Recipe mappingRecipeToEnt(RecieptDto recipe);
+	Person mappingPersonToEnt(PersonDto person);
+	Product mappingProductToEnt(ProductDto product);
+	RecieptDto mappingRecipeToDto(Recipe recipe);
+	PersonDto mappingPersonToDto(Person person);
+	ProductDto mappingProductToDto(Product product);
 }

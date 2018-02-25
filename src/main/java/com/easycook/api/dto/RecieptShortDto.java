@@ -1,5 +1,6 @@
 package com.easycook.api.dto;
 
+import com.easycook.entities.Recipe;
 import com.easycook.entities.RecipeId;
 
 public class RecieptShortDto {
@@ -14,10 +15,20 @@ public class RecieptShortDto {
 	
 	public RecieptShortDto() {
 	}
+	public RecieptShortDto(Recipe recipe) {
+		this.recipeId = recipe.getReceipId();
+		this.tittle = recipe.getReceipId().getTitle();
+		this.categoryRecipes = recipe.getCategoryRecipes();
+		this.author = recipe.getReceipId().getAuthorId();
+		this.mainImg = recipe.getMainImage();
+		this.mainDescription = recipe.getMainDescription();
+		this.percent = recipe.getPersent();
+		this.score = recipe.getScore();
+	}
 
 	public RecieptShortDto(RecipeId recipeId,String tittle, String categoryRecipes, String author, String mainImg, String mainDescription,
 			double percent, double score) {
-		this.setRecipeId(recipeId);
+		this.recipeId = recipeId;
 		this.tittle = tittle;
 		this.categoryRecipes = categoryRecipes;
 		this.author = author;

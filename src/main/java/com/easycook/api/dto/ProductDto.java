@@ -1,5 +1,7 @@
 package com.easycook.api.dto;
 
+import com.easycook.entities.Product;
+
 public class ProductDto {
 	private String name;
 	private double quantity;
@@ -7,6 +9,13 @@ public class ProductDto {
 	
 	
 	public ProductDto() {
+	}
+
+
+	public ProductDto(Product product) {
+		this.name = product.getName();
+		this.quantity = product.getQuantity();
+		this.unit = product.getUnit();
 	}
 
 
