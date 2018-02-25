@@ -2,6 +2,7 @@ package com.easycook.functional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,14 +27,18 @@ public class Realization implements IDatabaseController {
 	@Transactional
 	@Override
 	public boolean addPerson(PersonDto person) {
-		// TODO Auto-generated method stub
-		return false;
+		if (getPersonByName(person.getEmail()) != null) {
+			return false;
+		}
+		if(person.getEmail()!=null&&person.getLastName()!=null&&person.getName()!=null&&person.getPassword()!=null) {
+			em.persist(mappingPersonToEnt(person));
+		}
+		return true;
 	}
 
 	@Override
-	public PersonDto getPersonByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public PersonDto getPersonByName(String email) {
+		return mappingPersonToDto(em.find(Person.class, email));
 	}
 
 	@Override
@@ -49,20 +54,26 @@ public class Realization implements IDatabaseController {
 	}
 
 	@Override
+	@Transactional
 	public boolean addNewProduct(ProductDto product) {
-		// TODO Auto-generated method stub
-		return false;
+		if (getProduct(product.getName()) != null) {
+			return false;
+		}
+		em.persist(mappingProductToEnt(product));
+		return true;
 	}
 
 	@Override
 	public Iterable<ProductDto> getProduct(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("");
+		query.setParameter(1, name);
+		return query.getResultList();
 	}
 
 	@Override
+	@Transactional
 	public boolean addRecipe(RecieptDto recipe) {
-		
+
 		if (getFullRecipeById(recipe.getRecipeId()) != null) {
 			return false; // you can`t add recipe if combination consist
 		} else if (recipe.getRecipeId() != null && recipe.getMainImg() != null && recipe.getMainDescription() != null
@@ -75,8 +86,9 @@ public class Realization implements IDatabaseController {
 	}
 
 	@Override
+	@Transactional
 	public boolean removeRecipe(RecipeId tittle, String email) {
-		Recipe recipe = mappingRecipeToEnt(getFullRecipeById(tittle)); 
+		Recipe recipe = mappingRecipeToEnt(getFullRecipeById(tittle));
 		if (tittle.getAuthorId() != email && recipe == null) {
 			return false;
 		}
@@ -98,14 +110,16 @@ public class Realization implements IDatabaseController {
 
 	@Override
 	public Iterable<RecieptShortDto> getRecipeByTittle(String tittle) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("");
+		query.setParameter(1, tittle);
+		return query.getResultList();
 	}
 
 	@Override
 	public Iterable<RecieptShortDto> getRecipeByAuthor(String author) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("");
+		query.setParameter(1, author);
+		return query.getResultList();
 	}
 
 	@Override
@@ -116,25 +130,28 @@ public class Realization implements IDatabaseController {
 
 	@Override
 	public Iterable<RecieptShortDto> getRecipeByMethod(String method) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("");
+		query.setParameter(1, method);
+		return query.getResultList();
 	}
 
 	@Override
 	public Iterable<RecieptShortDto> getRecipeByCategory(String category) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("");
+		query.setParameter(1, category);
+		return query.getResultList();
 	}
 
 	@Override
 	public RecieptDto getFullRecipeById(RecipeId idRec) {
+
+		return mappingRecipeToDto(em.find(Recipe.class, idRec));
 		
-		//return em.find(Recipe.class, idRec);
-		// TODO Auto-generated method stub
-				return null;
+		
 	}
 
 	@Override
+	@Transactional //??
 	public boolean addToFavorite(RecipeId idRec, PersonDto person) {
 		// TODO Auto-generated method stub
 		return false;
@@ -151,8 +168,6 @@ public class Realization implements IDatabaseController {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-
 
 	@Override
 	public Recipe mappingRecipeToEnt(RecieptDto recipe) {
@@ -189,6 +204,5 @@ public class Realization implements IDatabaseController {
 		ProductDto productDto = new ProductDto(product);
 		return productDto;
 	}
-	
 
 }
