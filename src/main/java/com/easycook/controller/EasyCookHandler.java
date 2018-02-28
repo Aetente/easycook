@@ -1,5 +1,7 @@
 package com.easycook.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -61,7 +63,7 @@ public class EasyCookHandler{
 	}
 
 	@PostMapping({IRecipesConstans.RECIPE+"/products"})
-	public Iterable<RecieptShortDto> getRecipeByProducts(@RequestBody ProductDto[] products) {
+	public Iterable<RecieptShortDto> getRecipeByProducts(@RequestBody List<ProductDto> products) {
 		
 		return dbController.getRecipeByProducts(products);
 	}
@@ -103,11 +105,7 @@ public class EasyCookHandler{
 		return dbController.editPerson(personData,user);
 	}
 	
-	@PostMapping({IRecipesConstans.PRODUCT})
-	boolean addNewProduct(@RequestBody ProductDto product) {
-		return dbController.addNewProduct(product);
-		
-	}
+	
 	@GetMapping({IRecipesConstans.PRODUCT+"/{name}"})
 	Iterable<ProductDto> getProduct(@PathVariable String name){
 		return dbController.getProduct(name);

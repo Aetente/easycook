@@ -1,29 +1,30 @@
 package com.easycook.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import org.springframework.data.annotation.Id;
 
 import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
 
-public class Recipe {
-	@EmbeddedId
+public class Recipe implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
 	private RecipeId receipId;
 	private String mainImage;
 	private String mainDescription;
 	private double persent;
 	private double score;
 	private int amountOfVoters;
-	@ManyToMany
+	
 	List<Product> products;
 	private List<MethodOfRecipe> methods;
-	@OneToMany
+	
 	List<Step> steps;
 	private String categoryRecipes;
 	

@@ -1,9 +1,13 @@
 package com.easycook.functional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,33 +21,45 @@ import com.easycook.entities.Product;
 import com.easycook.entities.Recipe;
 import com.easycook.entities.RecipeId;
 import com.easycook.interfaces.IDatabaseController;
+import com.easycook.interfaces.PersonRepository;
+import com.easycook.interfaces.RecipeRepository;
 
 @Repository
 public class Realization implements IDatabaseController {
+	
+	@Autowired
+	RecipeRepository recipeRep;
+	@Autowired
+	PersonRepository personRep;
 
-	@PersistenceContext
-	EntityManager em;
+	
+	
+	public Realization() {
+	}
 
-	@Transactional
+	
 	@Override
 	public boolean addPerson(PersonDto person) {
 		if (getPersonByName(person.getEmail()) != null) {
 			return false;
 		}
 		if(person.getEmail()!=null&&person.getLastName()!=null&&person.getName()!=null&&person.getPassword()!=null) {
-			em.persist(mappingPersonToEnt(person));
-		}
+		personRep.save(mappingPersonToEnt(person));
 		return true;
+		}
+		return false;
 	}
 
 	@Override
 	public PersonDto getPersonByName(String email) {
-		return mappingPersonToDto(em.find(Person.class, email));
+		
+		return mappingPersonToDto(personRep.findOne(email));
 	}
 
 	@Override
 	public boolean editPerson(ChangeProfilePersonDto personData, String email) {
 		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -53,25 +69,15 @@ public class Realization implements IDatabaseController {
 		return 0;
 	}
 
-	@Override
-	@Transactional
-	public boolean addNewProduct(ProductDto product) {
-		if (getProduct(product.getName()) != null) {
-			return false;
-		}
-		em.persist(mappingProductToEnt(product));
-		return true;
-	}
 
 	@Override
 	public Iterable<ProductDto> getProduct(String name) {
-		Query query = em.createQuery("");
-		query.setParameter(1, name);
-		return query.getResultList();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	@Transactional
+	
 	public boolean addRecipe(RecieptDto recipe) {
 
 		if (getFullRecipeById(recipe.getRecipeId()) != null) {
@@ -79,20 +85,20 @@ public class Realization implements IDatabaseController {
 		} else if (recipe.getRecipeId() != null && recipe.getMainImg() != null && recipe.getMainDescription() != null
 				&& recipe.getProducts() != null && recipe.getMethod() != null && recipe.getSteps() != null
 				&& recipe.getCategoryRecipes() != null) {
-			em.persist(mappingRecipeToEnt(recipe));
+			recipeRep.save(mappingRecipeToEnt(recipe));
 		} // check field on null
 
 		return true;
 	}
 
 	@Override
-	@Transactional
+	
 	public boolean removeRecipe(RecipeId tittle, String email) {
 		Recipe recipe = mappingRecipeToEnt(getFullRecipeById(tittle));
 		if (tittle.getAuthorId() != email && recipe == null) {
 			return false;
 		}
-		em.remove(recipe);
+		recipeRep.delete(recipe);
 		return true;
 	}
 
@@ -104,61 +110,65 @@ public class Realization implements IDatabaseController {
 
 	@Override
 	public Iterable<RecieptShortDto> getAllRecipes() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return mappingRecipeToDto(recipeRep.findAll());
 	}
+
+	private Iterable<RecieptShortDto> mappingRecipeToDto(Iterable<Recipe> reciepts) {
+		List<RecieptShortDto> res = new ArrayList<>();
+		for (Recipe recipe : reciepts) {
+			res.add(new RecieptShortDto(recipe));
+		}
+		return res;
+	}
+
 
 	@Override
 	public Iterable<RecieptShortDto> getRecipeByTittle(String tittle) {
-		Query query = em.createQuery("");
-		query.setParameter(1, tittle);
-		return query.getResultList();
+		// TODO Auto-generated method stub
+				return null;
 	}
 
 	@Override
 	public Iterable<RecieptShortDto> getRecipeByAuthor(String author) {
-		Query query = em.createQuery("");
-		query.setParameter(1, author);
-		return query.getResultList();
+		// TODO Auto-generated method stub
+				return null;
 	}
 
 	@Override
-	public Iterable<RecieptShortDto> getRecipeByProducts(ProductDto[] products) {
+	public Iterable<RecieptShortDto> getRecipeByProducts(List<ProductDto> products) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Iterable<RecieptShortDto> getRecipeByMethod(String method) {
-		Query query = em.createQuery("");
-		query.setParameter(1, method);
-		return query.getResultList();
+		// TODO Auto-generated method stub
+				return null;
 	}
 
 	@Override
 	public Iterable<RecieptShortDto> getRecipeByCategory(String category) {
-		Query query = em.createQuery("");
-		query.setParameter(1, category);
-		return query.getResultList();
+		// TODO Auto-generated method stub
+				return null;
 	}
 
 	@Override
 	public RecieptDto getFullRecipeById(RecipeId idRec) {
 
-		return mappingRecipeToDto(em.find(Recipe.class, idRec));
+		return mappingRecipeToDto(recipeRep.findOne(idRec));
 		
 		
 	}
 
 	@Override
-	@Transactional //??
 	public boolean addToFavorite(RecipeId idRec, PersonDto person) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public double calculatePercentageOfMatches(ProductDto[] products, RecieptDto[] recipes) {
+	public double calculatePercentageOfMatches(List<ProductDto> products, List<RecieptDto> recipes) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

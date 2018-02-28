@@ -1,5 +1,7 @@
 package com.easycook.interfaces;
 
+import java.util.List;
+
 import com.easycook.api.dto.ChangeProfilePersonDto;
 import com.easycook.api.dto.PersonDto;
 import com.easycook.api.dto.ProductDto;
@@ -15,7 +17,7 @@ public interface IDatabaseController {
 	PersonDto getPersonByName(String name);
 	boolean editPerson(ChangeProfilePersonDto personData, String email); //TODO
 	double ratingPerson(double[] marks);
-	boolean addNewProduct(ProductDto product);
+
 	Iterable<ProductDto> getProduct(String name);
 	boolean addRecipe(RecieptDto recipe); 
 	boolean removeRecipe(RecipeId tittle, String email);  //TODO
@@ -23,12 +25,12 @@ public interface IDatabaseController {
 	Iterable<RecieptShortDto> getAllRecipes();
 	Iterable<RecieptShortDto> getRecipeByTittle(String tittle);
 	Iterable<RecieptShortDto> getRecipeByAuthor(String author);
-	Iterable<RecieptShortDto> getRecipeByProducts(ProductDto[] products);
+	Iterable<RecieptShortDto> getRecipeByProducts(List<ProductDto> products);
 	Iterable<RecieptShortDto> getRecipeByMethod(String method);
 	Iterable<RecieptShortDto> getRecipeByCategory(String category);
 	RecieptDto getFullRecipeById(RecipeId idRec);
 	boolean addToFavorite(RecipeId idRec, PersonDto person); 
-	double calculatePercentageOfMatches(ProductDto[] products, RecieptDto[] recipes);
+	double calculatePercentageOfMatches(List<ProductDto> products, List<RecieptDto> recipes);
 	double ratingRecipes(double mark);
 	Recipe mappingRecipeToEnt(RecieptDto recipe);
 	Person mappingPersonToEnt(PersonDto person);

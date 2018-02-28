@@ -1,11 +1,15 @@
 package com.easycook.entities;
 
-import org.springframework.data.annotation.Id;
+import java.io.Serializable;
 
 import com.easycook.api.dto.ProductDto;
 
-public class Product {
-	@Id
+public class Product implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private double quantity;
 	private String unit;

@@ -1,29 +1,32 @@
 package com.easycook.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.Id;
 
 import com.easycook.api.dto.PersonDto;
-import com.easycook.api.dto.RecieptDto;
-import com.easycook.api.dto.RecieptShortDto;
 
-public class Person {
+public class Person implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	private String email;
 	
 	private String name;
 	private String lastName;
 	private String password;
-	private String login;
-	@Id
-	private String email;
+	private String nickname;
+	
 	private String image;
 	private double scorePerson;
-	@OneToMany
+	
 	List<RecipeId>myRecipes;
-	@OneToMany
+	
 	List<RecipeId>favoriteRecipes;
 	
 	
@@ -31,7 +34,7 @@ public class Person {
 		this.name = person.getName();
 		this.lastName = person.getLastName();
 		this.password = person.getPassword();
-		this.login=person.getLogin();
+		this.nickname=person.getLogin();
 		this.email = person.getEmail();
 		this.image = person.getImage();
 		this.scorePerson = person.getScorePerson();
@@ -98,18 +101,18 @@ public class Person {
 	}
 
 	public String getLogin() {
-		return login;
+		return nickname;
 	}
 
 
 	public void setLogin(String login) {
-		this.login = login;
+		this.nickname = login;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Person [name=" + name + ", lastName=" + lastName + ", password=" + password + ", login=" + login
+		return "Person [name=" + name + ", lastName=" + lastName + ", password=" + password + ", login=" + nickname
 				+ ", email=" + email + ", image=" + image + ", scorePerson=" + scorePerson + ", myRecipes=" + myRecipes
 				+ ", favoriteRecipes=" + favoriteRecipes + "]";
 	}

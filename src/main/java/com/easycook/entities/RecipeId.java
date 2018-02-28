@@ -1,9 +1,15 @@
 package com.easycook.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class RecipeId {
+public class RecipeId implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String title;
 	String authorId;
 
