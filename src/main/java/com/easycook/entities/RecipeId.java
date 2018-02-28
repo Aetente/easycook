@@ -2,9 +2,7 @@ package com.easycook.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
 
-@Embeddable
 public class RecipeId implements Serializable {
 	/**
 	 * 
