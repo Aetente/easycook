@@ -30,6 +30,9 @@ public class Recipe implements Serializable {
 
 	
 
+	public Recipe() {
+	}
+
 	public Recipe(RecieptDto recipe) {
 		this.id=recipe.getId();
 		this.categoryRecipes=recipe.getCategoryRecipes();

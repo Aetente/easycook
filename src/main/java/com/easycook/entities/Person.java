@@ -30,6 +30,9 @@ public class Person implements Serializable {
 	List<RecipeId>favoriteRecipes;
 	
 	
+	public Person() {
+	}
+
 	public Person(PersonDto person) {
 		this.name = person.getName();
 		this.lastName = person.getLastName();
