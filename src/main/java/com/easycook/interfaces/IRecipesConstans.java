@@ -3,7 +3,7 @@ package com.easycook.interfaces;
 public interface IRecipesConstans {
 		
 	
-	String RECIPES = "/recipes"; //array
+	String RECIPES = "recipes"; //array
 	String CHANGE_RECIPE = RECIPES+"/change";
 	
 	String RECIPE = RECIPES+"/recipe"; //object

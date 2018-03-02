@@ -1,11 +1,8 @@
 package com.easycook.api.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.easycook.entities.MethodOfRecipe;
-import com.easycook.entities.Product;
 import com.easycook.entities.Recipe;
 import com.easycook.entities.RecipeId;
 import com.easycook.entities.Step;
@@ -41,14 +38,10 @@ public class RecieptDto  implements Serializable {
 		this.mainDescription = recipe.getMainDescription();
 		this.percent = recipe.getPercent();
 		this.score = recipe.getScore();
-		this.products = new ArrayList<>();
-		for(ProductDto product : recipe.getProducts()) {
-			ProductDto pr = new ProductDto(product);
-			this.products.add(pr);
-		}
+		this.products = recipe.getProducts();
 		this.method = recipe.getMethods();
-		this.steps = recipe.getSteps();
 		this.amountOfVoters = recipe.getAmountOfVoters();
+		this.steps = recipe.getSteps();
 	}
 	public RecieptDto(RecipeId id, String categoryRecipes, String mainImg, String mainDescription, double percent,
 			double score, List<ProductDto> products, List<String> method, List<Step> steps,

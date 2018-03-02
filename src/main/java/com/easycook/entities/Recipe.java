@@ -40,7 +40,7 @@ public class Recipe implements Serializable {
 		this.products=recipe.getProducts();
 		this.methods=recipe.getMethod();
 		this.amountOfVoters=recipe.getAmountOfVoters();
-		
+		this.steps=recipe.getSteps();
 	}
 
 	public RecipeId getId() {
