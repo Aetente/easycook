@@ -6,6 +6,10 @@ import com.easycook.entities.RecipeId;
 import com.easycook.entities.Step;
 
 public class ChangeRecipeDto extends RecieptDto {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String email;
 	
 	

@@ -6,7 +6,6 @@ import com.easycook.api.dto.ChangeProfilePersonDto;
 import com.easycook.api.dto.PersonDto;
 import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
-import com.easycook.api.dto.RecieptShortDto;
 import com.easycook.entities.Person;
 import com.easycook.entities.Product;
 import com.easycook.entities.Recipe;
@@ -22,12 +21,12 @@ public interface IDatabaseController {
 	boolean addRecipe(RecieptDto recipe); 
 	boolean removeRecipe(RecipeId tittle, String email);  //TODO
 	boolean changeRecipe(RecieptDto recipe,String email);   //TODO
-	Iterable<RecieptShortDto> getAllRecipes();
-	Iterable<RecieptShortDto> getRecipeByTittle(String tittle);
-	Iterable<RecieptShortDto> getRecipeByAuthor(String author);
-	Iterable<RecieptShortDto> getRecipeByProducts(List<ProductDto> products);
-	Iterable<RecieptShortDto> getRecipeByMethod(String method);
-	Iterable<RecieptShortDto> getRecipeByCategory(String category);
+	Iterable<RecieptDto> getAllRecipes();
+	Iterable<RecieptDto> getRecipeByTittle(String tittle);
+	Iterable<RecieptDto> getRecipeByAuthor(String author);
+	Iterable<RecieptDto> getRecipeByProducts(List<ProductDto> products);
+	Iterable<RecieptDto> getRecipeByMethod(String method);
+	Iterable<RecieptDto> getRecipeByCategory(String category);
 	RecieptDto getFullRecipeById(RecipeId idRec);
 	boolean addToFavorite(RecipeId idRec, PersonDto person); 
 	double calculatePercentageOfMatches(List<ProductDto> products, List<RecieptDto> recipes);

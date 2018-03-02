@@ -1,15 +1,23 @@
 package com.easycook.api.dto;
 
+import java.io.Serializable;
 import java.util.List;
+
+import org.springframework.data.annotation.Id;
 
 import com.easycook.entities.Person;
 import com.easycook.entities.RecipeId;
 
-public class PersonDto {
+public class PersonDto implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String image;
 	private String name;
 	private String lastName;
 	private String login;
+	@Id
 	private String email;
 	private String password;
 	private double scorePerson;

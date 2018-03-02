@@ -34,4 +34,10 @@ public class RecipeId implements Serializable {
 	public void setAuthorId(String authorId) {
 		this.authorId = authorId;
 	}
+
+	@Override
+	public String toString() {
+		return "RecipeId [title=" + title + ", authorId=" + authorId + "]";
+	}
+
 }

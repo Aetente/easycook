@@ -1,10 +1,16 @@
 package com.easycook.api.dto;
 
+import java.io.Serializable;
+
 import com.easycook.entities.RecipeId;
 
-public class RecipeRemoveDto {
-	private String user;
-	private RecipeId idRec;
+public class RecipeRemoveDto implements Serializable {
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//	private String user;  
+	private RecipeId id;
 	
 	
 	public RecipeRemoveDto() {
@@ -14,44 +20,32 @@ public class RecipeRemoveDto {
 
 
 
-	public RecipeRemoveDto(String user, RecipeId idRec) {
-		this.user = user;
-		this.idRec = idRec;
-	}
-
-
-
-
-
-	public String getAuthor() {
-		return user;
-	}
-
-
+	public RecipeRemoveDto( RecipeId id) {
 	
-	public String getUser() {
-		return user;
+		this.id = id;
 	}
 
 
-	public void setUser(String user) {
-		this.user = user;
-	}
+
 
 
 	public RecipeId getIdRec() {
-		return idRec;
+		return id;
 	}
 
 
-	public void setIdRec(RecipeId idRec) {
-		this.idRec = idRec;
+	public void setIdRec(RecipeId id) {
+		this.id = id;
 	}
+
+
+
 
 
 	@Override
 	public String toString() {
-		return "RecipeRemoveDto [author=" + user + ", tittle=" + idRec + "]";
+		return "RecipeRemoveDto [idRec=" + id + "]";
 	}
-	
+
+
 }

@@ -10,7 +10,6 @@ import com.easycook.api.dto.ChangeProfilePersonDto;
 import com.easycook.api.dto.PersonDto;
 import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
-import com.easycook.api.dto.RecieptShortDto;
 import com.easycook.entities.Person;
 import com.easycook.entities.Product;
 import com.easycook.entities.Recipe;
@@ -19,42 +18,41 @@ import com.easycook.interfaces.IDatabaseController;
 import com.easycook.interfaces.PersonRepository;
 import com.easycook.interfaces.RecipeRepository;
 
+
 @Repository
 public class Realization implements IDatabaseController {
-	
+
 	@Autowired
 	RecipeRepository recipeRep;
 	@Autowired
 	PersonRepository personRep;
 
-	
-	
 	public Realization() {
 	}
 
-	
 	@Override
 	public boolean addPerson(PersonDto person) {
 		if (getPersonByName(person.getEmail()) != null) {
 			return false;
 		}
-		if(person.getEmail()!=null&&person.getLastName()!=null&&person.getName()!=null&&person.getPassword()!=null) {
-		personRep.save(mappingPersonToEnt(person));
-		return true;
+		if (person.getEmail() != null && person.getLastName() != null && person.getName() != null
+				&& person.getPassword() != null) {
+			personRep.save(mappingPersonToEnt(person));
+			return true;
 		}
 		return false;
 	}
 
 	@Override
 	public PersonDto getPersonByName(String email) {
-		
+
 		return mappingPersonToDto(personRep.findOne(email));
 	}
 
 	@Override
 	public boolean editPerson(ChangeProfilePersonDto personData, String email) {
 		// TODO Auto-generated method stub
-		
+
 		return false;
 	}
 
@@ -64,41 +62,43 @@ public class Realization implements IDatabaseController {
 		return 0;
 	}
 
-
 	@Override
 	public Iterable<ProductDto> getProduct(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	
+	@Override  //work
 	public boolean addRecipe(RecieptDto recipe) {
 
 		if (getFullRecipeById(recipe.getRecipeId()) != null) {
 			return false; // you can`t add recipe if combination consist
-		} 
+		}
 		if (recipe.getRecipeId() != null && recipe.getMainImg() != null && recipe.getMainDescription() != null
 				&& recipe.getProducts() != null && recipe.getMethod() != null && recipe.getSteps() != null
 				&& recipe.getCategoryRecipes() != null) {
 			recipeRep.save(mappingRecipeToEnt(recipe));
 			return true;
 		} else {
-			
+
 			return false;// check field on null
 		}
 
 	}
 
 	@Override
-	
-	public boolean removeRecipe(RecipeId tittle, String email) {
-		Recipe recipe = mappingRecipeToEnt(getFullRecipeById(tittle));
-		if (tittle.getAuthorId() != email && recipe == null) {
+
+	public boolean removeRecipe(RecipeId idRec, String email) {
+		Recipe recipe = mappingRecipeToEnt(getFullRecipeById(idRec));
+		if(recipe == null) {
+			return false;
+		}
+		if (recipe.getId().getAuthorId() != email ) {
 			return false;
 		}
 		recipeRep.delete(recipe);
 		return true;
+		
 	}
 
 	@Override
@@ -108,59 +108,64 @@ public class Realization implements IDatabaseController {
 	}
 
 	@Override
-	public Iterable<RecieptShortDto> getAllRecipes() {
+	public Iterable<RecieptDto> getAllRecipes() {
 		
-		return mappingRecipeToDto(recipeRep.findAll());
+		Iterable<Recipe> recipes=recipeRep.findAll();
+		List<RecieptDto> list = new ArrayList<>();
+		for(Recipe recipe: recipes) {
+			list.add(mappingRecipeToDto(recipe));
+		}
+			
+		return list;
 	}
 
-	private Iterable<RecieptShortDto> mappingRecipeToDto(Iterable<Recipe> reciepts) {
+	/*private Iterable<RecieptShortDto> mappingRecipeToDto(Iterable<Recipe> reciepts) {
 		List<RecieptShortDto> res = new ArrayList<>();
 		for (Recipe recipe : reciepts) {
 			res.add(new RecieptShortDto(recipe));
 		}
 		return res;
 	}
-
-
+*/
 	@Override
-	public Iterable<RecieptShortDto> getRecipeByTittle(String tittle) {
-		// TODO Auto-generated method stub
-				return null;
-	}
-
-	@Override
-	public Iterable<RecieptShortDto> getRecipeByAuthor(String author) {
-		// TODO Auto-generated method stub
-				return null;
-	}
-
-	@Override
-	public Iterable<RecieptShortDto> getRecipeByProducts(List<ProductDto> products) {
+	public Iterable<RecieptDto> getRecipeByTittle(String tittle) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Iterable<RecieptShortDto> getRecipeByMethod(String method) {
+	public Iterable<RecieptDto> getRecipeByAuthor(String author) {
 		// TODO Auto-generated method stub
-				return null;
+		return null;
 	}
 
 	@Override
-	public Iterable<RecieptShortDto> getRecipeByCategory(String category) {
+	public Iterable<RecieptDto> getRecipeByProducts(List<ProductDto> products) {
 		// TODO Auto-generated method stub
-				return null;
+		return null;
+	}
+
+	@Override
+	public Iterable<RecieptDto> getRecipeByMethod(String method) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<RecieptDto> getRecipeByCategory(String category) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public RecieptDto getFullRecipeById(RecipeId idRec) {
 		Recipe res = recipeRep.findOne(idRec);
-		if(res==null) {
+		if (res == null) {
 			return null;
-		}else {
-		return mappingRecipeToDto(res);
+		} else {
+			return mappingRecipeToDto(res);
 		}
-		
+
 	}
 
 	@Override

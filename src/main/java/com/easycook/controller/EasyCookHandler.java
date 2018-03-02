@@ -37,7 +37,8 @@ public class EasyCookHandler{
 
 	@DeleteMapping({IRecipesConstans.RECIPE})
 	public boolean removeRecipe(@RequestBody RecipeRemoveDto recipe,@RequestHeader("Authorization") String email) {
-		return dbController.removeRecipe(recipe.getIdRec(), email); //TODO
+		return dbController.removeRecipe(recipe.getIdRec(), email);
+		//TODO
 	}
 	@PutMapping({IRecipesConstans.CHANGE_RECIPE}) //TODO 
 	boolean changeRecipe(@RequestBody ChangeRecipeDto recipe, @RequestHeader("Authorization") String email) {
@@ -46,36 +47,36 @@ public class EasyCookHandler{
 	}
 	
 	@GetMapping({IRecipesConstans.RECIPES})
-	Iterable<RecieptShortDto> getAllRecipes(){
+	Iterable<RecieptDto> getAllRecipes(){
 		return dbController.getAllRecipes();
 	}
 	
 
 	@GetMapping({IRecipesConstans.RECIPE+"/title/{tittle}"})
-	public Iterable<RecieptShortDto> getRecipeByTittle(@PathVariable String tittle) {
+	public Iterable<RecieptDto> getRecipeByTittle(@PathVariable String tittle) {
 		return dbController.getRecipeByTittle(tittle);
 	}
 	
 	@GetMapping({IRecipesConstans.RECIPE+"/author/{author}"})
-	public Iterable<RecieptShortDto> getRecipeByAuthor(@PathVariable String author) {
+	public Iterable<RecieptDto> getRecipeByAuthor(@PathVariable String author) {
 		
 		return dbController.getRecipeByAuthor(author);
 	}
 
 	@PostMapping({IRecipesConstans.RECIPE+"/products"})
-	public Iterable<RecieptShortDto> getRecipeByProducts(@RequestBody List<ProductDto> products) {
+	public Iterable<RecieptDto> getRecipeByProducts(@RequestBody List<ProductDto> products) {
 		
 		return dbController.getRecipeByProducts(products);
 	}
 
 	@GetMapping({IRecipesConstans.RECIPE+"/{method}"})
-	public Iterable<RecieptShortDto> getRecipeByMethod(@PathVariable String method) {
+	public Iterable<RecieptDto> getRecipeByMethod(@PathVariable String method) {
 		
 		return dbController.getRecipeByMethod(method);
 	}
 
 	@GetMapping({IRecipesConstans.RECIPE+"/{category}"})
-	public Iterable<RecieptShortDto> getRecipeByCategory(@PathVariable String category) {
+	public Iterable<RecieptDto> getRecipeByCategory(@PathVariable String category) {
 	
 		return dbController.getRecipeByCategory(category);
 	}
