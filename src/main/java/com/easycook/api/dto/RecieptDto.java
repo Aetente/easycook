@@ -1,5 +1,6 @@
 package com.easycook.api.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +10,22 @@ import com.easycook.entities.Recipe;
 import com.easycook.entities.RecipeId;
 import com.easycook.entities.Step;
 
-public class RecieptDto extends RecieptShortDto {
+public class RecieptDto  implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private RecipeId id;
+
+	private String categoryRecipes;
+
+	private String mainImg;
+	private String mainDescription;
+	private double percent;
+	private double score;
 	private  List<ProductDto> products;
-	private List<MethodOfRecipe> method;
+	private List<String> method;
 	private List<Step> steps;//list
 	private int amountOfVoters;
 	
@@ -22,10 +35,14 @@ public class RecieptDto extends RecieptShortDto {
 	
 	
 	public RecieptDto(Recipe recipe) {
-		super(recipe.getReceipId(), recipe.getReceipId().getTitle(), recipe.getCategoryRecipes(), recipe.getReceipId().getAuthorId(), recipe.getMainImage(), recipe.getMainDescription(), recipe.getPersent(), recipe.getScore());
-		
+		this.id = recipe.getReceipId();
+		this.categoryRecipes = recipe.getCategoryRecipes();
+		this.mainImg = recipe.getMainImg();
+		this.mainDescription = recipe.getMainDescription();
+		this.percent = recipe.getPercent();
+		this.score = recipe.getScore();
 		this.products = new ArrayList<>();
-		for(Product product : recipe.getProducts()) {
+		for(ProductDto product : recipe.getProducts()) {
 			ProductDto pr = new ProductDto(product);
 			this.products.add(pr);
 		}
@@ -33,17 +50,96 @@ public class RecieptDto extends RecieptShortDto {
 		this.steps = recipe.getSteps();
 		this.amountOfVoters = recipe.getAmountOfVoters();
 	}
-
-	public RecieptDto(RecipeId recipeId, String tittle, String categoryRecipes, String author, String mainImg,
-			String mainDescription, double percent, double score, List<ProductDto> products,
-			List<MethodOfRecipe> method, List<Step> steps, int amountOfVoters) {
-		super(recipeId, tittle, categoryRecipes, author, mainImg, mainDescription, percent, score);
+	public RecieptDto(RecipeId id, String categoryRecipes, String mainImg, String mainDescription, double percent,
+			double score, List<ProductDto> products, List<String> method, List<Step> steps,
+			int amountOfVoters) {
+		this.id = id;
+		this.categoryRecipes = categoryRecipes;
+		this.mainImg = mainImg;
+		this.mainDescription = mainDescription;
+		this.percent = percent;
+		this.score = score;
 		this.products = products;
 		this.method = method;
 		this.steps = steps;
 		this.amountOfVoters = amountOfVoters;
 	}
+	
 
+
+
+
+	public RecipeId getId() {
+		return id;
+	}
+
+
+	public void setId(RecipeId id) {
+		this.id = id;
+	}
+
+
+	public String getCategoryRecipes() {
+		return categoryRecipes;
+	}
+
+
+	public void setCategoryRecipes(String categoryRecipes) {
+		this.categoryRecipes = categoryRecipes;
+	}
+
+
+	public String getMainImg() {
+		return mainImg;
+	}
+
+
+	public void setMainImg(String mainImg) {
+		this.mainImg = mainImg;
+	}
+
+
+	public String getMainDescription() {
+		return mainDescription;
+	}
+
+
+	public void setMainDescription(String mainDescription) {
+		this.mainDescription = mainDescription;
+	}
+
+
+	public double getPercent() {
+		return percent;
+	}
+
+
+	public void setPercent(double percent) {
+		this.percent = percent;
+	}
+
+
+	public double getScore() {
+		return score;
+	}
+
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public void setAmountOfVoters(int amountOfVoters) {
+		this.amountOfVoters = amountOfVoters;
+	}
+
+
+	
 
 
 	public List<ProductDto> getProducts() {
@@ -51,7 +147,7 @@ public class RecieptDto extends RecieptShortDto {
 	}
 
 
-	public List<MethodOfRecipe> getMethod() {
+	public List<String> getMethod() {
 		return method;
 	}
 
@@ -60,7 +156,7 @@ public class RecieptDto extends RecieptShortDto {
 	}
 
 
-	public void setMethod(List<MethodOfRecipe> method) {
+	public void setMethod(List<String> method) {
 		this.method = method;
 	}
 
@@ -87,6 +183,12 @@ public class RecieptDto extends RecieptShortDto {
 	public String toString() {
 		return "RecieptDto [products=" + products + ", method=" + method + ", steps=" + steps + ", amountOfVoters="
 				+ amountOfVoters + "]";
+	}
+
+
+	public RecipeId getRecipeId() {
+		
+		return id;
 	}
 
 

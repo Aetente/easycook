@@ -2,7 +2,6 @@ package com.easycook.api.dto;
 
 import java.util.List;
 
-import com.easycook.entities.MethodOfRecipe;
 import com.easycook.entities.RecipeId;
 import com.easycook.entities.Step;
 
@@ -17,17 +16,27 @@ public class ChangeRecipeDto extends RecieptDto {
 		this.email = email;
 	}*/
 
-	public ChangeRecipeDto(RecipeId recipeId, String tittle, String categoryRecipes, String author, String mainImg,
-			String mainDescription, double percent, double score, List<ProductDto> products,
-			List<MethodOfRecipe> method, List<Step> steps, int amountOfVoters, String email) {
-		super(recipeId, tittle, categoryRecipes, author, mainImg, mainDescription, percent, score, products, method,
-				steps, amountOfVoters);
-		this.email = email;
+
+
+	
+
+
+
+	public ChangeRecipeDto() {
 	}
 
 	public ChangeRecipeDto(String email) {
 		this.email = email;
 	}
+
+	public ChangeRecipeDto(RecipeId id, String categoryRecipes, String mainImg, String mainDescription, double percent,
+			double score, List<ProductDto> products, List<String> method, List<Step> steps, int amountOfVoters,
+			String email) {
+		super(id, categoryRecipes, mainImg, mainDescription, percent, score, products, method, steps, amountOfVoters);
+		this.email = email;
+	}
+
+
 
 	public String getEmail() {
 		return email;

@@ -77,13 +77,17 @@ public class Realization implements IDatabaseController {
 
 		if (getFullRecipeById(recipe.getRecipeId()) != null) {
 			return false; // you can`t add recipe if combination consist
-		} else if (recipe.getRecipeId() != null && recipe.getMainImg() != null && recipe.getMainDescription() != null
+		} 
+		if (recipe.getRecipeId() != null && recipe.getMainImg() != null && recipe.getMainDescription() != null
 				&& recipe.getProducts() != null && recipe.getMethod() != null && recipe.getSteps() != null
 				&& recipe.getCategoryRecipes() != null) {
 			recipeRep.save(mappingRecipeToEnt(recipe));
-		} // check field on null
+			return true;
+		} else {
+			
+			return false;// check field on null
+		}
 
-		return true;
 	}
 
 	@Override
@@ -150,9 +154,12 @@ public class Realization implements IDatabaseController {
 
 	@Override
 	public RecieptDto getFullRecipeById(RecipeId idRec) {
-
-		return mappingRecipeToDto(recipeRep.findOne(idRec));
-		
+		Recipe res = recipeRep.findOne(idRec);
+		if(res==null) {
+			return null;
+		}else {
+		return mappingRecipeToDto(res);
+		}
 		
 	}
 

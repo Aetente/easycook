@@ -5,6 +5,9 @@ public class MethodOfRecipe {
 	
 	
 
+	public MethodOfRecipe() {
+	}
+
 	public MethodOfRecipe(String method) {
 		this.method = method;
 	}

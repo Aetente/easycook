@@ -24,6 +24,11 @@ public class ProductDto {
 		this.quantity = quantity;
 		this.unit = unit;
 	}
+	public ProductDto(ProductDto product) {
+		this.name = product.getName();
+		this.quantity = product.getQuantity();
+		this.unit = product.getUnit();
+	}
 
 
 	public String getName() {

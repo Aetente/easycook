@@ -1,50 +1,52 @@
 package com.easycook.api.dto;
 
+import java.io.Serializable;
+
 import com.easycook.entities.Recipe;
 import com.easycook.entities.RecipeId;
 
-public class RecieptShortDto {
-	private RecipeId recipeId;
-	private String tittle;
+public class RecieptShortDto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private RecipeId id;
+
 	private String categoryRecipes;
-	private String author;
+
 	private String mainImg;
 	private String mainDescription;
 	private double percent;
 	private double score;
-	
+
 	public RecieptShortDto() {
 	}
+
 	public RecieptShortDto(Recipe recipe) {
-		this.recipeId = recipe.getReceipId();
-		this.tittle = recipe.getReceipId().getTitle();
+		this.id = recipe.getReceipId();
+
 		this.categoryRecipes = recipe.getCategoryRecipes();
-		this.author = recipe.getReceipId().getAuthorId();
-		this.mainImg = recipe.getMainImage();
+
+		this.mainImg = recipe.getMainImg();
 		this.mainDescription = recipe.getMainDescription();
-		this.percent = recipe.getPersent();
+		this.percent = recipe.getPercent();
 		this.score = recipe.getScore();
 	}
 
-	public RecieptShortDto(RecipeId recipeId,String tittle, String categoryRecipes, String author, String mainImg, String mainDescription,
+	public RecieptShortDto(RecipeId recipeId, String categoryRecipes, String mainImg, String mainDescription,
 			double percent, double score) {
-		this.recipeId = recipeId;
-		this.tittle = tittle;
+		this.id = recipeId;
+
 		this.categoryRecipes = categoryRecipes;
-		this.author = author;
+
 		this.mainImg = mainImg;
 		this.mainDescription = mainDescription;
 		this.percent = percent;
 		this.score = score;
 	}
 
-	public String getTittle() {
-		return tittle;
-	}
-
-	public void setTittle(String tittle) {
-		this.tittle = tittle;
-	}
+	
 
 	public String getCategoryRecipes() {
 		return categoryRecipes;
@@ -54,13 +56,7 @@ public class RecieptShortDto {
 		this.categoryRecipes = categoryRecipes;
 	}
 
-	public String getAuthor() {
-		return author;
-	}
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
 
 	public String getMainImg() {
 		return mainImg;
@@ -94,25 +90,13 @@ public class RecieptShortDto {
 		this.score = score;
 	}
 
-	@Override
-	public String toString() {
-		return "RecieptShortDto [tittle=" + tittle + ", categoryRecipes=" + categoryRecipes + ", author=" + author
-				+ ", mainImg=" + mainImg + ", mainDescription=" + mainDescription + ", percent=" + percent + ", score="
-				+ score + "]";
-	}
 
 	public RecipeId getRecipeId() {
-		return recipeId;
+		return id;
 	}
 
 	public void setRecipeId(RecipeId recipeId) {
-		this.recipeId = recipeId;
+		this.id = recipeId;
 	}
-
-
-	
-	
-
-	
 
 }
