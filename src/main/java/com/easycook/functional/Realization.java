@@ -139,8 +139,12 @@ public class Realization implements IDatabaseController {
 
 	@Override
 	public Iterable<RecieptDto> getRecipeByAuthor(String author) {
-		// TODO Auto-generated method stub
-		return null;
+		Iterable<Recipe> recipes = recipeRep.findRecipeByAuthor(author);
+		List<RecieptDto> list = new ArrayList<>();
+		for (Recipe recipe : recipes) {
+			list.add(mappingRecipeToDto(recipe));
+		}
+		return list;
 	}
 
 	@Override

@@ -68,13 +68,13 @@ public class EasyCookHandler{
 		return dbController.getRecipeByProducts(products);
 	}
 
-	@GetMapping({IRecipesConstans.RECIPE+"/{method}"})
+	@GetMapping({IRecipesConstans.RECIPE+"/method/{method}"})
 	public Iterable<RecieptDto> getRecipeByMethod(@PathVariable String method) {
 		
 		return dbController.getRecipeByMethod(method);
 	}
 
-	@GetMapping({IRecipesConstans.RECIPE+"/{category}"})
+	@GetMapping({IRecipesConstans.RECIPE+"/category/{category}"})
 	public Iterable<RecieptDto> getRecipeByCategory(@PathVariable String category) {
 	
 		return dbController.getRecipeByCategory(category);

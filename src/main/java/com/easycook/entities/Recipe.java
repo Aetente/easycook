@@ -21,7 +21,7 @@ public class Recipe implements Serializable {
 	private double percent;
 	private double score;
 	List<ProductDto> products;
-	private List<String> methods;
+	private List<String> method;
 	private int amountOfVoters; 
 	List<Step> steps;
 
@@ -38,7 +38,7 @@ public class Recipe implements Serializable {
 		this.percent=recipe.getPercent();
 		this.score=recipe.getScore();
 		this.products=recipe.getProducts();
-		this.methods=recipe.getMethod();
+		this.method=recipe.getMethod();
 		this.amountOfVoters=recipe.getAmountOfVoters();
 		this.steps=recipe.getSteps();
 	}
@@ -53,7 +53,7 @@ public class Recipe implements Serializable {
 		this.percent = percent;
 		this.score = score;
 		this.products = products;
-		this.methods = methods;
+		this.method = methods;
 		this.amountOfVoters = amountOfVoters;
 		this.steps = steps;
 	}
@@ -115,11 +115,11 @@ public class Recipe implements Serializable {
 	}
 
 	public List<String> getMethods() {
-		return methods;
+		return method;
 	}
 
 	public void setMethods(List<String> methods) {
-		this.methods = methods;
+		this.method = methods;
 	}
 
 	public List<Step> getSteps() {
@@ -148,7 +148,7 @@ public class Recipe implements Serializable {
 	public String toString() {
 		return "Recipe [id=" + id + ", categoryRecipes=" + categoryRecipes + ", mainImg=" + mainImg
 				+ ", mainDescription=" + mainDescription + ", percent=" + percent + ", score=" + score + ", products="
-				+ products + ", methods=" + methods + ", amountOfVoters=" + amountOfVoters + ", steps=" + steps + "]";
+				+ products + ", methods=" + method + ", amountOfVoters=" + amountOfVoters + ", steps=" + steps + "]";
 	}
 	
 	
