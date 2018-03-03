@@ -15,9 +15,7 @@ public class Recipe implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private RecipeId id;
-
 	private String categoryRecipes;
-
 	private String mainImg;
 	private String mainDescription;
 	private double percent;
@@ -25,7 +23,6 @@ public class Recipe implements Serializable {
 	List<ProductDto> products;
 	private List<String> methods;
 	private int amountOfVoters; 
-	
 	List<Step> steps;
 
 	
@@ -44,6 +41,21 @@ public class Recipe implements Serializable {
 		this.methods=recipe.getMethod();
 		this.amountOfVoters=recipe.getAmountOfVoters();
 		this.steps=recipe.getSteps();
+	}
+
+	
+	public Recipe(RecipeId id, String categoryRecipes, String mainImg, String mainDescription, double percent,
+			double score, List<ProductDto> products, List<String> methods, int amountOfVoters, List<Step> steps) {
+		this.id = id;
+		this.categoryRecipes = categoryRecipes;
+		this.mainImg = mainImg;
+		this.mainDescription = mainDescription;
+		this.percent = percent;
+		this.score = score;
+		this.products = products;
+		this.methods = methods;
+		this.amountOfVoters = amountOfVoters;
+		this.steps = steps;
 	}
 
 	public RecipeId getId() {
@@ -130,6 +142,13 @@ public class Recipe implements Serializable {
 
 	public void setAmountOfVoters(int amountOfVoters) {
 		this.amountOfVoters = amountOfVoters;
+	}
+
+	@Override
+	public String toString() {
+		return "Recipe [id=" + id + ", categoryRecipes=" + categoryRecipes + ", mainImg=" + mainImg
+				+ ", mainDescription=" + mainDescription + ", percent=" + percent + ", score=" + score + ", products="
+				+ products + ", methods=" + methods + ", amountOfVoters=" + amountOfVoters + ", steps=" + steps + "]";
 	}
 	
 	

@@ -18,7 +18,6 @@ import com.easycook.api.dto.ChangeRecipeDto;
 import com.easycook.api.dto.PersonDto;
 import com.easycook.api.dto.ProductDto;
 import com.easycook.api.dto.RecieptDto;
-import com.easycook.api.dto.RecieptShortDto;
 import com.easycook.api.dto.RecipeRemoveDto;
 import com.easycook.entities.RecipeId;
 import com.easycook.interfaces.IDatabaseController;

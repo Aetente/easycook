@@ -3,8 +3,6 @@ package com.easycook.api.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-
 import com.easycook.entities.Person;
 import com.easycook.entities.RecipeId;
 
@@ -13,12 +11,12 @@ public class PersonDto implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private String email;
 	private String image;
 	private String name;
 	private String lastName;
 	private String login;
-	@Id
-	private String email;
 	private String password;
 	private double scorePerson;
 	private List<RecipeId> myRecipes;
@@ -28,28 +26,39 @@ public class PersonDto implements Serializable {
 	}
 
 	public PersonDto(Person person) {
+		this.email = person.getEmail();
 		this.image = person.getImage();
 		this.name = person.getName();
 		this.lastName = person.getLastName();
 		this.login = person.getLogin();
-		this.email = person.getEmail();
+	
 		this.password = person.getPassword();
 		this.scorePerson = person.getScorePerson();
 		this.myRecipes = person.getMyRecipes();
 		this.favoriteRecipes = person.getFavoriteRecipes();
 	}
 
-	public PersonDto(String image, String name, String lastName, String login, String email, String password,
+	public PersonDto(String email, String name, String lastName, String login, String image, String password,
 			double scorePerson, List<RecipeId> myRecipes, List<RecipeId> favoriteRecipes) {
+		this.email = email;
 		this.image = image;
 		this.name = name;
 		this.lastName = lastName;
 		this.login = login;
-		this.email = email;
+	
 		this.password = password;
 		this.scorePerson = scorePerson;
 		this.myRecipes = myRecipes;
 		this.favoriteRecipes = favoriteRecipes;
+	}
+
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getLastName() {
@@ -114,6 +123,10 @@ public class PersonDto implements Serializable {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

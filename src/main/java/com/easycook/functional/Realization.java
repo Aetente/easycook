@@ -18,7 +18,6 @@ import com.easycook.interfaces.IDatabaseController;
 import com.easycook.interfaces.PersonRepository;
 import com.easycook.interfaces.RecipeRepository;
 
-
 @Repository
 public class Realization implements IDatabaseController {
 
@@ -45,8 +44,12 @@ public class Realization implements IDatabaseController {
 
 	@Override
 	public PersonDto getPersonByName(String email) {
-
-		return mappingPersonToDto(personRep.findOne(email));
+		Person res = personRep.findOne(email);
+		if (res == null) {
+			return null;
+		} else {
+			return mappingPersonToDto(res);
+		}
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class Realization implements IDatabaseController {
 		return null;
 	}
 
-	@Override  //work
+	@Override // work
 	public boolean addRecipe(RecieptDto recipe) {
 
 		if (getFullRecipeById(recipe.getRecipeId()) != null) {
@@ -90,15 +93,15 @@ public class Realization implements IDatabaseController {
 
 	public boolean removeRecipe(RecipeId idRec, String email) {
 		Recipe recipe = mappingRecipeToEnt(getFullRecipeById(idRec));
-		if(recipe == null) {
+		if (recipe == null) {
 			return false;
 		}
-		if (recipe.getId().getAuthorId() != email ) {
+		if (recipe.getId().getAuthorId() != email) {
 			return false;
 		}
 		recipeRep.delete(recipe);
 		return true;
-		
+
 	}
 
 	@Override
@@ -107,30 +110,31 @@ public class Realization implements IDatabaseController {
 		return false;
 	}
 
-	@Override //work
+	@Override // work
 	public Iterable<RecieptDto> getAllRecipes() {
-		
-		Iterable<Recipe> recipes=recipeRep.findAll();
+
+		Iterable<Recipe> recipes = recipeRep.findAll();
 		List<RecieptDto> list = new ArrayList<>();
-		for(Recipe recipe: recipes) {
+		for (Recipe recipe : recipes) {
 			list.add(mappingRecipeToDto(recipe));
 		}
-			
+
 		return list;
 	}
 
-	/*private Iterable<RecieptShortDto> mappingRecipeToDto(Iterable<Recipe> reciepts) {
-		List<RecieptShortDto> res = new ArrayList<>();
-		for (Recipe recipe : reciepts) {
-			res.add(new RecieptShortDto(recipe));
-		}
-		return res;
-	}
-*/
+	/*
+	 * private Iterable<RecieptShortDto> mappingRecipeToDto(Iterable<Recipe>
+	 * reciepts) { List<RecieptShortDto> res = new ArrayList<>(); for (Recipe recipe
+	 * : reciepts) { res.add(new RecieptShortDto(recipe)); } return res; }
+	 */
 	@Override
 	public Iterable<RecieptDto> getRecipeByTittle(String tittle) {
-		// TODO Auto-generated method stub
-		return null;
+		Iterable<Recipe> recipes = recipeRep.findRecipeByTitle(tittle);
+		List<RecieptDto> list = new ArrayList<>();
+		for (Recipe recipe : recipes) {
+			list.add(mappingRecipeToDto(recipe));
+		}
+		return list;
 	}
 
 	@Override
@@ -153,11 +157,15 @@ public class Realization implements IDatabaseController {
 
 	@Override
 	public Iterable<RecieptDto> getRecipeByCategory(String category) {
-		// TODO Auto-generated method stub
-		return null;
+		Iterable<Recipe> recipes = recipeRep.findRecipeByCategory(category);
+		List<RecieptDto> list = new ArrayList<>();
+		for (Recipe recipe : recipes) {
+			list.add(mappingRecipeToDto(recipe));
+		}
+		return list;
 	}
 
-	@Override
+	@Override //work
 	public RecieptDto getFullRecipeById(RecipeId idRec) {
 		Recipe res = recipeRep.findOne(idRec);
 		if (res == null) {

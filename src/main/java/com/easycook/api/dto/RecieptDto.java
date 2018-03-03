@@ -170,18 +170,20 @@ public class RecieptDto  implements Serializable {
 	}
 
 
-	
 
-	@Override
-	public String toString() {
-		return "RecieptDto [products=" + products + ", method=" + method + ", steps=" + steps + ", amountOfVoters="
-				+ amountOfVoters + "]";
-	}
 
 
 	public RecipeId getRecipeId() {
 		
 		return id;
+	}
+
+
+	@Override
+	public String toString() {
+		return "RecieptDto [id=" + id + ", categoryRecipes=" + categoryRecipes + ", mainImg=" + mainImg
+				+ ", mainDescription=" + mainDescription + ", percent=" + percent + ", score=" + score + ", products="
+				+ products + ", method=" + method + ", steps=" + steps + ", amountOfVoters=" + amountOfVoters + "]";
 	}
 
 
